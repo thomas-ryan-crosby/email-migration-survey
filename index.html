@@ -773,12 +773,12 @@
       </div>
       <div class="signed-in-followup" data-for="business_computer" style="display:none;">
         <span class="followup-label">Step 3</span>
-        <div class="followup-prompt">Is your Crosby email currently set up in <span class="app-name"></span> on this computer?</div>
-        <div class="followup-sub">So we send you the exact next step, not the whole guide.</div>
-        <div class="choice-grid signed-in-grid" data-question="business_computer_signed_in">
-          <label class="choice"><input type="radio" name="business_computer_signed_in" value="Yes, signed in"><div class="icon-frame">✅</div><div class="label">Yes — I can read it there right now</div></label>
-          <label class="choice"><input type="radio" name="business_computer_signed_in" value="No, not signed in"><div class="icon-frame">⬜</div><div class="label">No — I'd be setting it up fresh</div></label>
-          <label class="choice"><input type="radio" name="business_computer_signed_in" value="Not sure"><div class="icon-frame">❓</div><div class="label">Not sure</div></label>
+        <div class="followup-prompt">Have you already disconnected your old Crosby Development email from <span class="app-name"></span>?</div>
+        <div class="followup-sub">The old setup talked to the Rackspace server. If it's still there, the guide will walk you through removing it first.</div>
+        <div class="choice-grid signed-in-grid" data-question="business_computer_removed_old">
+          <label class="choice"><input type="radio" name="business_computer_removed_old" value="Yes, already removed"><div class="icon-frame">✅</div><div class="label">Yes — I've already removed the old Crosby email</div></label>
+          <label class="choice"><input type="radio" name="business_computer_removed_old" value="No, still connected"><div class="icon-frame">⬜</div><div class="label">No — the old Crosby email is still in there</div></label>
+          <label class="choice"><input type="radio" name="business_computer_removed_old" value="I'm not sure"><div class="icon-frame">❓</div><div class="label">I'm not sure</div></label>
         </div>
       </div>
       <div class="guide-rec-slot" data-for="business_computer"></div>
@@ -835,12 +835,12 @@
       </div>
       <div class="signed-in-followup" data-for="personal_computer" style="display:none;">
         <span class="followup-label">Step 3</span>
-        <div class="followup-prompt">Is your Crosby email currently set up in <span class="app-name"></span> on this computer?</div>
-        <div class="followup-sub">So we send you the exact next step, not the whole guide.</div>
-        <div class="choice-grid signed-in-grid" data-question="personal_computer_signed_in">
-          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="Yes, signed in"><div class="icon-frame">✅</div><div class="label">Yes — I can read it there right now</div></label>
-          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="No, not signed in"><div class="icon-frame">⬜</div><div class="label">No — I'd be setting it up fresh</div></label>
-          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="Not sure"><div class="icon-frame">❓</div><div class="label">Not sure</div></label>
+        <div class="followup-prompt">Have you already disconnected your old Crosby Development email from <span class="app-name"></span>?</div>
+        <div class="followup-sub">The old setup talked to the Rackspace server. If it's still there, the guide will walk you through removing it first.</div>
+        <div class="choice-grid signed-in-grid" data-question="personal_computer_removed_old">
+          <label class="choice"><input type="radio" name="personal_computer_removed_old" value="Yes, already removed"><div class="icon-frame">✅</div><div class="label">Yes — I've already removed the old Crosby email</div></label>
+          <label class="choice"><input type="radio" name="personal_computer_removed_old" value="No, still connected"><div class="icon-frame">⬜</div><div class="label">No — the old Crosby email is still in there</div></label>
+          <label class="choice"><input type="radio" name="personal_computer_removed_old" value="I'm not sure"><div class="icon-frame">❓</div><div class="label">I'm not sure</div></label>
         </div>
       </div>
       <div class="guide-rec-slot" data-for="personal_computer"></div>
@@ -907,12 +907,12 @@
         </div>
         <div class="signed-in-followup" data-for="phone_app" style="display:none;">
           <span class="followup-label">Step 3</span>
-          <div class="followup-prompt">Is your Crosby email currently set up in <span class="app-name"></span> on this phone?</div>
-          <div class="followup-sub">So we send you the exact next step, not the whole guide.</div>
-          <div class="choice-grid signed-in-grid" data-question="phone_app_signed_in">
-            <label class="choice"><input type="radio" name="phone_app_signed_in" value="Yes, signed in"><div class="icon-frame">✅</div><div class="label">Yes — I can read it there right now</div></label>
-            <label class="choice"><input type="radio" name="phone_app_signed_in" value="No, not signed in"><div class="icon-frame">⬜</div><div class="label">No — I'd be setting it up fresh</div></label>
-            <label class="choice"><input type="radio" name="phone_app_signed_in" value="Not sure"><div class="icon-frame">❓</div><div class="label">Not sure</div></label>
+          <div class="followup-prompt">Have you already disconnected your old Crosby Development email from <span class="app-name"></span>?</div>
+          <div class="followup-sub">The old setup talked to the Rackspace server. If it's still there, the guide will walk you through removing it first.</div>
+          <div class="choice-grid signed-in-grid" data-question="phone_app_removed_old">
+            <label class="choice"><input type="radio" name="phone_app_removed_old" value="Yes, already removed"><div class="icon-frame">✅</div><div class="label">Yes — I've already removed the old Crosby email</div></label>
+            <label class="choice"><input type="radio" name="phone_app_removed_old" value="No, still connected"><div class="icon-frame">⬜</div><div class="label">No — the old Crosby email is still in there</div></label>
+            <label class="choice"><input type="radio" name="phone_app_removed_old" value="I'm not sure"><div class="icon-frame">❓</div><div class="label">I'm not sure</div></label>
           </div>
         </div>
         <div class="guide-rec-slot" data-for="phone_app"></div>
@@ -1103,22 +1103,25 @@
   };
   CONTEXTS.personal_computer = CONTEXTS.business_computer;
 
-  function stayHrefFor(stay, signedIn) {
+  function stayHrefFor(stay, removedOld) {
     if (stay.phases === 'pdf') {
-      if (signedIn === 'Yes, signed in')    return stay.pdfYes;
-      if (signedIn === 'No, not signed in') return stay.pdfNo;
+      // Already-removed → fresh add (first-setup PDF)
+      // Still-connected → need to remove + re-add (remove-and-re-add PDF)
+      // Not sure → start with first-setup; it's the more common case
+      if (removedOld === 'Yes, already removed') return stay.pdfNo;
+      if (removedOld === 'No, still connected') return stay.pdfYes;
       return stay.pdfNotSure;
     }
-    if (signedIn === 'Yes, signed in')    return stay.url + '#phase-1';
-    if (signedIn === 'No, not signed in') return stay.url + '#phase-2';
+    if (removedOld === 'Yes, already removed') return stay.url + '#phase-2';
+    if (removedOld === 'No, still connected')  return stay.url + '#phase-1';
     return stay.url;
   }
 
-  function stayHeadlineFor(signedIn) {
-    if (signedIn === 'Yes, signed in')
-      return { line: 'Start with Phase 1 — Remove the old account.',  why: 'Your current setup is talking to the old Rackspace server. You\'ll remove that account first, then re-add through Google in Phase 2.' };
-    if (signedIn === 'No, not signed in')
-      return { line: 'Skip straight to Phase 2 — Add your Workspace account.', why: 'Nothing to remove — you can go right to the add-account flow.' };
+  function stayHeadlineFor(removedOld) {
+    if (removedOld === 'Yes, already removed')
+      return { line: 'Skip straight to Phase 2 — Add your Workspace account.', why: 'You\'ve already cleared the old setup. The guide opens right where you need to be — the add-account flow.' };
+    if (removedOld === 'No, still connected')
+      return { line: 'Start with Phase 1 — Remove the old account.', why: 'The old Crosby setup is still pointed at the Rackspace server. You\'ll remove that first, then re-add through Google in Phase 2.' };
     return { line: 'Start at the top — the guide covers both cases.', why: 'Phase 1 is clearly marked "skip if you\'ve never set up Crosby email here," so you can\'t go wrong.' };
   }
 
@@ -1140,11 +1143,11 @@
     const cfg = CONTEXTS[device];
     if (!cfg) return;
 
-    const app       = document.querySelector('input[name="' + device + '"]:checked')?.value;
-    const choice    = document.querySelector('input[name="' + device + '_choice"]:checked')?.value;
-    const signedIn  = document.querySelector('input[name="' + device + '_signed_in"]:checked')?.value;
-    const pathBox   = document.querySelector('.path-followup[data-for="' + device + '"]');
-    const siBox     = document.querySelector('.signed-in-followup[data-for="' + device + '"]');
+    const app         = document.querySelector('input[name="' + device + '"]:checked')?.value;
+    const choice      = document.querySelector('input[name="' + device + '_choice"]:checked')?.value;
+    const removedOld  = document.querySelector('input[name="' + device + '_removed_old"]:checked')?.value;
+    const pathBox     = document.querySelector('.path-followup[data-for="' + device + '"]');
+    const siBox       = document.querySelector('.signed-in-followup[data-for="' + device + '"]');
     const recSlot   = document.querySelector('.guide-rec-slot[data-for="' + device + '"]');
     if (!recSlot) return;
     const setRec = (html) => { recSlot.innerHTML = html; };
@@ -1226,7 +1229,7 @@
       siBox.querySelectorAll('.app-name').forEach(s => { s.textContent = appCfg.stay.name; });
     }
 
-    if (!signedIn) {
+    if (!removedOld) {
       setRec(
         '<div class="guide-rec subtle">' +
           '<p>One more — answer above and we\'ll jump you to the matching section.</p>' +
@@ -1236,8 +1239,8 @@
       return;
     }
 
-    const headline = stayHeadlineFor(signedIn);
-    const href     = stayHrefFor(appCfg.stay, signedIn);
+    const headline = stayHeadlineFor(removedOld);
+    const href     = stayHrefFor(appCfg.stay, removedOld);
     setRec(
       '<div class="guide-rec">' +
         '<strong class="headline">' + escapeHtml(headline.line) + '</strong>' +
@@ -1265,7 +1268,7 @@
         updateGuideRec(device);
       });
     });
-    document.querySelectorAll('input[name="' + device + '_signed_in"]').forEach(input => {
+    document.querySelectorAll('input[name="' + device + '_removed_old"]').forEach(input => {
       input.addEventListener('change', () => updateGuideRec(device));
     });
   });
