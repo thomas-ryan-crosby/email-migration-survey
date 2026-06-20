@@ -43,7 +43,8 @@ To stop FormSubmit from exposing the email address publicly (and to dodge scrape
 
 ```
 .
-├── index.html          Survey
+├── index.html          Survey (/)
+├── help.html           Setup-guides landing page (/help)
 ├── icons/              Official app icons (Wikimedia Commons)
 │   ├── outlook-classic.svg
 │   ├── outlook-new.svg
@@ -51,9 +52,31 @@ To stop FormSubmit from exposing the email address publicly (and to dodge scrape
 │   ├── gmail.svg
 │   ├── yahoo-mail.png
 │   └── samsung-email.png
-├── vercel.json         Cache headers
+├── guides/             PDF walkthroughs linked from /help
+│   ├── apple-mail-first-setup.pdf
+│   └── apple-mail-remove-and-re-add.pdf
+├── vercel.json         Clean URLs + cache headers
 └── README.md
 ```
+
+## Adding a new setup guide
+
+1. Drop the PDF into `guides/` (use kebab-case filenames).
+2. Open `help.html`, find the `coming-soon` card for the matching scenario, and convert it to an `available` card:
+
+```html
+<a class="guide-card available" href="guides/your-new-guide.pdf" target="_blank" rel="noopener">
+  <div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div>
+  <div class="title">Outlook (Classic) — first-time setup</div>
+  <div class="device">Windows desktop</div>
+  <div class="footer-row">
+    <span class="badge live">● Ready</span>
+    <span class="open-arrow">Open →</span>
+  </div>
+</a>
+```
+
+3. Commit and push — Vercel auto-deploys.
 
 ## Icon sources
 

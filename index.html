@@ -358,6 +358,49 @@
     color: #713f12;
   }
 
+  /* Top nav */
+  nav.top {
+    display: flex;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 6px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  nav.top a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: all 0.15s ease;
+  }
+  nav.top a.active { background: var(--accent); color: white; }
+  nav.top a:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+
+  /* "What changed" highlight block */
+  .change-block {
+    background: linear-gradient(135deg, #e6edf7 0%, #f3f4f6 100%);
+    border: 1px solid #cdd9ee;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 14px 0;
+  }
+  .change-block h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .change-block p { margin: 0 0 8px; font-size: 16px; }
+  .change-block p:last-child { margin-bottom: 0; }
+
   /* anti-spam honeypot, hidden from real users */
   .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
@@ -373,6 +416,11 @@
 <body>
 <div class="wrap">
 
+  <nav class="top">
+    <a href="/" class="active">📋 Survey</a>
+    <a href="/help">📘 Setup Guides</a>
+  </nav>
+
   <header class="hero">
     <h1>📧 Help Us Help You: Email Setup Survey</h1>
     <p>We just moved everyone's email over to <strong>Google Workspace</strong>. To make sure you can keep reading and sending email on all your devices, we'd like to know how you check email today. This will take about 2 minutes.</p>
@@ -383,6 +431,15 @@
     <h2>First — what is an "email app"?</h2>
     <p>An <strong>email app</strong> (sometimes called an "email client" or "email management system") is simply the program you open to read and send your email. Think of it like a mailbox app: the mail itself lives at the post office (the email server), and the app on your device is how you go look at it.</p>
     <p>You might use <strong>one app on your computer</strong>, a <strong>different one on your phone</strong>, and sometimes a <strong>website in a browser</strong>. All of them can show the <em>same</em> email account — they're just different windows into it.</p>
+
+    <div class="change-block">
+      <h3>🏤 What actually changed: the post office, not your app</h3>
+      <p>The <strong>post office (the email server) is what moved</strong> — from Rackspace to Google Workspace. Your email address is the same. In most cases <strong>you do not need to change which app you use</strong> — you just need to point it at the new server.</p>
+      <p>A couple of notes:</p>
+      <p>• Many people find the <strong>Gmail app is a really nice fit</strong> with Google Workspace email, since they're made by the same company. If you've been curious about switching, now's a good time.</p>
+      <p>• If you were using <strong>Outlook only because the old Rackspace server didn't work with the Gmail app</strong>, that limitation is gone — Outlook is no longer required.</p>
+    </div>
+
     <div class="callout">
       <strong>Why we're asking:</strong> Each app needs slightly different steps to connect to the new Google Workspace email. If we know which ones you use, we can give you the exact step-by-step guide for your situation.
     </div>
