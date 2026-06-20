@@ -427,6 +427,81 @@
   .reco-block p:last-child { margin-bottom: 0; }
   .reco-block a { color: #713f12; font-weight: 700; }
 
+  /* Signed-in follow-up question that appears after a desktop app is picked */
+  .signed-in-followup {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: var(--accent-soft);
+    border: 1px solid #cdd9ee;
+    border-radius: 12px;
+  }
+  .signed-in-followup .prompt {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+  .signed-in-followup .prompt .app-name { font-weight: 800; }
+  .signed-in-followup .prompt .sub {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .signed-in-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+  }
+  .signed-in-grid .icon-frame {
+    background: white;
+    font-size: 22px;
+    border: 1px solid #f1f1f1;
+  }
+
+  /* Contextual guide recommendation card */
+  .guide-rec {
+    margin-top: 14px;
+    background: white;
+    border: 2px solid var(--accent-2);
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 12px rgba(34, 49, 93, 0.08);
+  }
+  .guide-rec.warn {
+    border-color: #ca8a04;
+    background: #fef9c3;
+  }
+  .guide-rec.subtle {
+    border-color: var(--line);
+    box-shadow: none;
+    background: #fafafa;
+  }
+  .guide-rec strong.headline {
+    display: block;
+    color: var(--accent);
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .guide-rec.warn strong.headline { color: #713f12; }
+  .guide-rec p {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #374151;
+  }
+  .guide-rec a.guide-link {
+    display: inline-block;
+    margin-top: 4px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  .guide-rec a.guide-link:hover { background: #1a274a; }
+  .guide-rec.warn a.guide-link { background: #ca8a04; }
+  .guide-rec.warn a.guide-link:hover { background: #a16207; }
+
   /* anti-spam honeypot, hidden from real users */
   .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
@@ -578,6 +653,18 @@
       <div class="other-input" data-for="business_computer">
         <input type="text" name="business_computer_other_name" placeholder="What's the name of the app?">
       </div>
+      <div class="signed-in-followup" data-for="business_computer" style="display:none;">
+        <div class="prompt">
+          Is your Crosby email currently set up in <span class="app-name"></span> on this computer?
+          <span class="sub">So we send you the exact next step, not the whole guide.</span>
+        </div>
+        <div class="choice-grid signed-in-grid" data-question="business_computer_signed_in">
+          <label class="choice"><input type="radio" name="business_computer_signed_in" value="Yes, signed in"><div class="icon-frame">✅</div><div class="label">Yes — I can read it there right now</div></label>
+          <label class="choice"><input type="radio" name="business_computer_signed_in" value="No, not signed in"><div class="icon-frame">⬜</div><div class="label">No — I'd be setting it up fresh</div></label>
+          <label class="choice"><input type="radio" name="business_computer_signed_in" value="Not sure"><div class="icon-frame">❓</div><div class="label">Not sure</div></label>
+        </div>
+      </div>
+      <div class="guide-rec-slot" data-for="business_computer"></div>
     </div>
 
     <!-- PERSONAL COMPUTER -->
@@ -602,6 +689,18 @@
       <div class="other-input" data-for="personal_computer">
         <input type="text" name="personal_computer_other_name" placeholder="What's the name of the app?">
       </div>
+      <div class="signed-in-followup" data-for="personal_computer" style="display:none;">
+        <div class="prompt">
+          Is your Crosby email currently set up in <span class="app-name"></span> on this computer?
+          <span class="sub">So we send you the exact next step, not the whole guide.</span>
+        </div>
+        <div class="choice-grid signed-in-grid" data-question="personal_computer_signed_in">
+          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="Yes, signed in"><div class="icon-frame">✅</div><div class="label">Yes — I can read it there right now</div></label>
+          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="No, not signed in"><div class="icon-frame">⬜</div><div class="label">No — I'd be setting it up fresh</div></label>
+          <label class="choice"><input type="radio" name="personal_computer_signed_in" value="Not sure"><div class="icon-frame">❓</div><div class="label">Not sure</div></label>
+        </div>
+      </div>
+      <div class="guide-rec-slot" data-for="personal_computer"></div>
     </div>
 
     <!-- PHONE -->
@@ -758,6 +857,145 @@
         if (e.target.value === 'Other') otherBox.classList.add('show');
         else otherBox.classList.remove('show');
       }
+    });
+  });
+
+  // Guide-recommendation logic for desktop pickers.
+  // After picking an app on business_computer / personal_computer, ask
+  // "currently signed in?" and surface a direct link into the matching
+  // guide (Phase 1 vs Phase 2 anchor).
+  const COMPUTER_DEVICES = ['business_computer', 'personal_computer'];
+  const APP_GUIDES = {
+    'Outlook (Classic)': { url: 'guides/outlook-classic-windows.html', name: 'Outlook (Classic) for Windows', hasPhases: true },
+    'Outlook (New)':     { url: 'guides/outlook-new-windows.html',     name: 'Outlook (New) for Windows',     hasPhases: true },
+    'Apple Mail':        { url: 'guides/apple-mail-mac.html',          name: 'Apple Mail on Mac',              hasPhases: true },
+    'Gmail':             { url: 'guides/gmail-web.html',               name: 'Gmail at gmail.com',             hasPhases: false }
+  };
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function updateGuideRec(device) {
+    const app = document.querySelector('input[name="' + device + '"]:checked')?.value;
+    const signedIn = document.querySelector('input[name="' + device + '_signed_in"]:checked')?.value;
+    const followUp = document.querySelector('.signed-in-followup[data-for="' + device + '"]');
+    const recSlot  = document.querySelector('.guide-rec-slot[data-for="' + device + '"]');
+    if (!followUp || !recSlot) return;
+
+    // Reset
+    const setRec = (html) => { recSlot.innerHTML = html; };
+    const hideFollowUp = () => {
+      followUp.style.display = 'none';
+      // Clear any previous signed-in answer if app changed away from a guide-eligible one
+      followUp.querySelectorAll('input[type=radio]').forEach(r => { r.checked = false; });
+      followUp.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+    };
+
+    if (!app || app === "I don't use email here") {
+      hideFollowUp();
+      setRec('');
+      return;
+    }
+
+    if (app === 'Webmail website') {
+      hideFollowUp();
+      setRec(
+        '<div class="guide-rec warn">' +
+          '<strong class="headline">⚠ The old webmail site is being shut off.</strong>' +
+          '<p>webmail.websrvcs.com only worked with the old Rackspace server. For checking email in a browser going forward, use <strong>gmail.com</strong> — same idea, just on the new server.</p>' +
+          '<a class="guide-link" href="guides/gmail-web.html">→ Open the Gmail at gmail.com guide</a>' +
+        '</div>'
+      );
+      return;
+    }
+
+    if (app === 'Other') {
+      hideFollowUp();
+      setRec(
+        '<div class="guide-rec subtle">' +
+          '<strong class="headline">We\'ll send tailored steps for that app.</strong>' +
+          '<p>Make sure you filled in the app name above. We\'ll match it to the right guide (or write you one) when we follow up.</p>' +
+        '</div>'
+      );
+      return;
+    }
+
+    const guide = APP_GUIDES[app];
+    if (!guide) {
+      hideFollowUp();
+      setRec('');
+      return;
+    }
+
+    // Show the signed-in follow-up
+    followUp.style.display = 'block';
+    followUp.querySelectorAll('.app-name').forEach(s => { s.textContent = guide.name; });
+
+    if (!signedIn) {
+      setRec(
+        '<div class="guide-rec subtle">' +
+          '<p>Once you answer above, we\'ll point you straight at the matching section of the guide.</p>' +
+          '<a class="guide-link" href="' + guide.url + '">→ Open the ' + escapeHtml(guide.name) + ' guide</a>' +
+        '</div>'
+      );
+      return;
+    }
+
+    if (!guide.hasPhases) {
+      // Gmail at gmail.com — same path regardless of "signed in"
+      if (signedIn === 'Yes, signed in') {
+        setRec(
+          '<div class="guide-rec">' +
+            '<strong class="headline">✓ You\'re already there.</strong>' +
+            '<p>You can keep using gmail.com exactly as you have been. The Crosby account works the same way now that it\'s on Google\'s server.</p>' +
+            '<a class="guide-link" href="' + guide.url + '">→ Open the gmail.com guide (just in case)</a>' +
+          '</div>'
+        );
+      } else {
+        setRec(
+          '<div class="guide-rec">' +
+            '<strong class="headline">Sign in at gmail.com.</strong>' +
+            '<p>Nothing to install. Go to gmail.com and sign in with your @crosbydevelopment.com address — the guide walks each step.</p>' +
+            '<a class="guide-link" href="' + guide.url + '">→ Open the Gmail at gmail.com guide</a>' +
+          '</div>'
+        );
+      }
+      return;
+    }
+
+    // Outlook + Apple Mail — has Phase 1 (remove old) / Phase 2 (add new)
+    if (signedIn === 'Yes, signed in') {
+      setRec(
+        '<div class="guide-rec">' +
+          '<strong class="headline">Start with Phase 1 — Remove the old account.</strong>' +
+          '<p>Your current setup is talking to the old Rackspace server. You\'ll remove that account first, then re-add through Google in Phase 2.</p>' +
+          '<a class="guide-link" href="' + guide.url + '#phase-1">→ Open ' + escapeHtml(guide.name) + ' — Phase 1</a>' +
+        '</div>'
+      );
+    } else if (signedIn === 'No, not signed in') {
+      setRec(
+        '<div class="guide-rec">' +
+          '<strong class="headline">Skip straight to Phase 2 — Add your Workspace account.</strong>' +
+          '<p>Nothing to remove — you can go right to the add-account flow.</p>' +
+          '<a class="guide-link" href="' + guide.url + '#phase-2">→ Open ' + escapeHtml(guide.name) + ' — Phase 2</a>' +
+        '</div>'
+      );
+    } else { // Not sure
+      setRec(
+        '<div class="guide-rec subtle">' +
+          '<strong class="headline">Start at the top — the guide covers both cases.</strong>' +
+          '<p>Phase 1 is clearly marked "skip if you\'ve never set up Crosby email here," so you can\'t go wrong.</p>' +
+          '<a class="guide-link" href="' + guide.url + '">→ Open ' + escapeHtml(guide.name) + '</a>' +
+        '</div>'
+      );
+    }
+  }
+
+  // Listen for changes on either the app picker or the signed-in follow-up.
+  COMPUTER_DEVICES.forEach(device => {
+    document.querySelectorAll('input[name="' + device + '"], input[name="' + device + '_signed_in"]').forEach(input => {
+      input.addEventListener('change', () => updateGuideRec(device));
     });
   });
 </script>
