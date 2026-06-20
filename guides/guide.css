@@ -265,61 +265,95 @@ table.tbl th {
 .actions .primary { background: var(--accent); color: white; }
 .actions .secondary { background: white; color: var(--accent); border: 2px solid var(--accent); }
 
-/* Pinned top-right pill linking to Google's official version of these steps */
+/* Sidebar "Good news! Google has official docs" card.
+   Fixed at the top-right on desktop, larger and impossible to miss.
+   On narrower screens it collapses to a slim pill at the top so it
+   doesn't overlap with content. */
 .google-ref-fab {
   position: fixed;
   top: 16px;
   right: 16px;
   z-index: 999;
+  width: 260px;
   background: white;
-  color: var(--accent);
-  text-decoration: none;
-  padding: 10px 16px 10px 12px;
-  border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
-  border: 1px solid #cbd5e1;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-weight: 700;
-  font-size: 13px;
+  border: 2px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.2;
+  text-decoration: none;
+  color: inherit;
+  display: block;
   transition: all 0.15s ease;
 }
 .google-ref-fab:hover {
-  background: #f8fafc;
+  border-color: #4285F4;
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.24);
+}
+.google-ref-fab .google-ref-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 6px;
 }
 .google-ref-fab .g-mark {
-  width: 22px; height: 22px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4285F4 0%, #34A853 33%, #FBBC05 66%, #EA4335 100%);
   color: white;
   font-weight: 800;
-  font-size: 13px;
+  font-size: 14px;
   display: inline-flex; align-items: center; justify-content: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
   flex-shrink: 0;
 }
-.google-ref-fab .ref-arrow {
-  color: var(--muted);
-  font-weight: 800;
+.google-ref-fab .google-ref-body {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #374151;
+  margin-bottom: 10px;
 }
-.google-ref-fab .ref-text small {
-  display: block;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  line-height: 1.1;
+.google-ref-fab .google-ref-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
 }
+.google-ref-fab:hover .google-ref-button { background: #1a274a; }
 
+/* On narrow screens, collapse the card into a thin top banner */
+@media (max-width: 900px) {
+  .google-ref-fab {
+    position: static;
+    width: auto;
+    margin: 0 auto 14px;
+    max-width: 880px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .google-ref-fab .google-ref-header { font-size: 14px; margin-bottom: 0; flex-shrink: 0; }
+  .google-ref-fab .google-ref-body {
+    margin-bottom: 0;
+    font-size: 13px;
+    flex: 1;
+  }
+  .google-ref-fab .google-ref-button { flex-shrink: 0; padding: 7px 12px; font-size: 12px; }
+}
 @media (max-width: 560px) {
-  .google-ref-fab { padding: 8px 12px 8px 10px; font-size: 12px; }
-  .google-ref-fab .ref-text small { display: none; }
+  .google-ref-fab .google-ref-body { display: none; }
 }
 
 /* Floating "Need help?" widget — appears on every guide, hidden on print */

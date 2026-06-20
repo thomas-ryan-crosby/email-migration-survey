@@ -539,14 +539,22 @@
   }
   .path-choice ul li { margin-bottom: 4px; }
   .path-meta {
-    font-size: 13px;
+    display: block;
+    font-size: 14.5px;
+    line-height: 1.4;
     color: var(--accent);
-    font-weight: 600;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed var(--line);
+    font-weight: 700;
+    background: var(--accent-soft);
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-top: 12px;
+    border-left: 4px solid var(--accent-2);
   }
-  .path-choice.selected .path-meta { color: #14532d; border-top-color: rgba(22, 163, 74, 0.3); }
+  .path-choice.selected .path-meta {
+    color: #14532d;
+    background: rgba(22, 163, 74, 0.12);
+    border-left-color: var(--selected);
+  }
 
   /* Gmail variant: subtle star prefix on the title (no yellow tint) */
   .path-gmail .path-title::before {
@@ -695,8 +703,72 @@
   }
   .install-help-card a.guide-link:hover { background: var(--accent-soft); }
 
-  /* anti-spam honeypot, hidden from real users */
-  .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  /* Floating "Need help?" widget — same as the one on the guide pages */
+  .help-widget {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    z-index: 1000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  .help-widget-card {
+    background: var(--accent);
+    color: white;
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 14px 32px rgba(34, 49, 93, 0.4);
+    width: 260px;
+    border: 2px solid #1a274a;
+  }
+  .help-widget-card .title {
+    display: flex; align-items: center; justify-content: space-between;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    opacity: 0.88;
+    margin-bottom: 10px;
+  }
+  .help-widget-card .title button {
+    background: rgba(255,255,255,0.18); border: 0; color: white;
+    width: 24px; height: 24px; border-radius: 50%;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: inherit; line-height: 1;
+  }
+  .help-widget-card .title button:hover { background: rgba(255,255,255,0.3); }
+  .help-widget-call {
+    display: flex; align-items: center; gap: 10px;
+    background: white; color: var(--accent);
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 11px 12px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .help-widget-call:last-child { margin-bottom: 0; }
+  .help-widget-call .icon {
+    font-size: 18px;
+    width: 32px; height: 32px;
+    background: var(--accent-soft);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .help-widget-call .who { display: block; font-size: 14px; line-height: 1.15; }
+  .help-widget-call .num { display: block; font-size: 13px; opacity: 0.7; font-weight: 600; }
+  .help-widget-pill {
+    display: none;
+    background: var(--accent); color: white;
+    border: 2px solid #1a274a;
+    font-family: inherit; font-weight: 700; font-size: 15px;
+    border-radius: 999px;
+    padding: 12px 18px;
+    cursor: pointer;
+    box-shadow: 0 14px 32px rgba(34, 49, 93, 0.4);
+  }
+  .help-widget.collapsed .help-widget-card { display: none; }
+  .help-widget.collapsed .help-widget-pill { display: inline-flex; align-items: center; gap: 8px; }
+  @media (max-width: 560px) {
+    .help-widget { bottom: 12px; right: 12px; }
+    .help-widget-card { width: calc(100vw - 32px); max-width: 280px; }
+  }
 
   @media print {
     body { background: white; }
@@ -800,22 +872,8 @@
     </div>
   </section>
 
-  <!-- THE SURVEY -->
-  <form id="survey" class="card"
-        action="https://formsubmit.co/ryan@crosbydevelopment.com"
-        method="POST">
-
-    <!-- FormSubmit config -->
-    <input type="hidden" name="_cc" value="harryjr@crosbydevelopment.com">
-    <input type="hidden" name="_subject" value="📧 Email Setup Survey response">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_autoresponse" value="Thanks — we got your survey. Someone from Crosby Development will reach out to help get your email set up.">
-    <!-- Honeypot (real users won't fill this) -->
-    <div class="honeypot" aria-hidden="true">
-      <label>Leave this empty: <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
-    </div>
-
+  <!-- INTERACTIVE GUIDE FINDER (no submit — self-serve routing) -->
+  <section id="survey" class="card">
     <h2>Now — tell us about your devices</h2>
 
     <!-- FIRST STEP: comfort with installing apps -->
@@ -1043,103 +1101,15 @@
       </div>
     </div>
 
-    <!-- OTHER DEVICE -->
-    <div class="device-block">
-      <div class="device-title">
-        <span class="device-emoji">📟</span>
-        <div>
-          <h3>Any <u>other</u> device?</h3>
-          <div class="sub">Tablets, e-readers, second phone, work laptop — leave blank if none.</div>
-        </div>
-      </div>
-      <div class="tablet-note">
-        <strong>Good news — most tablets work like phones:</strong>
-        <ul>
-          <li><strong>iPad</strong> uses the <strong>iPhone</strong> steps</li>
-          <li><strong>Android tablet</strong> (Samsung Tab, etc.) uses the <strong>Android phone</strong> steps</li>
-          <li><strong>Mac laptop / iMac</strong> uses the <strong>Mac</strong> steps</li>
-          <li><strong>Chromebook</strong> just uses <strong>gmail.com in a browser</strong></li>
-        </ul>
-        Only fill this in for something <em>not</em> in the list above, or skip it.
-      </div>
-      <label class="field" for="other_device_name">What is the device?</label>
-      <input type="text" id="other_device_name" name="other_device_name" placeholder="e.g., second laptop, work tablet">
-      <div style="margin-top:14px;">
-        <div class="choice-grid" data-question="other_device_app">
-          <label class="choice"><input type="radio" name="other_device_app" value="N/A"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">N/A</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Outlook (Classic)"><div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div><div class="label">Outlook (Classic)</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Outlook (New)"><div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div><div class="label">Outlook (New)</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Apple Mail"><div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div><div class="label">Apple Mail</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Gmail"><div class="icon-frame"><img src="icons/gmail.svg" alt=""></div><div class="label">Gmail</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Yahoo Mail"><div class="icon-frame"><img src="icons/yahoo-mail.png" alt=""></div><div class="label">Yahoo Mail</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Webmail website"><div class="icon-frame"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div class="label">Webmail website</div></label>
-          <label class="choice"><input type="radio" name="other_device_app" value="Other"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Other</div></label>
-        </div>
-        <div class="other-input" data-for="other_device_app">
-          <input type="text" name="other_device_app_other_name" placeholder="What's the name of the app?">
-        </div>
-      </div>
-    </div>
-
-    <div class="device-block">
-      <div class="device-title">
-        <span class="device-emoji">📬</span>
-        <div>
-          <h3>How would you like the setup guide?</h3>
-        </div>
-      </div>
-      <div class="help-grid" data-question="guide_format">
-        <label class="choice"><input type="radio" name="guide_format" value="Emailed PDF"><div class="icon-frame">📧</div><div class="label">Emailed PDF</div></label>
-        <label class="choice"><input type="radio" name="guide_format" value="Printed paper handout"><div class="icon-frame">📄</div><div class="label">Printed paper handout</div></label>
-        <label class="choice"><input type="radio" name="guide_format" value="Phone call walk-through"><div class="icon-frame">📞</div><div class="label">Phone call walk-through</div></label>
-        <label class="choice"><input type="radio" name="guide_format" value="In-person help"><div class="icon-frame">🤝</div><div class="label">In-person help</div></label>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="device-block">
-      <div class="device-title">
-        <span class="device-emoji">👋</span>
-        <div>
-          <h3>Who are you, and how can we reach you?</h3>
-        </div>
-      </div>
-      <div class="contact-row">
-        <div>
-          <label class="field" for="name">Your name</label>
-          <input type="text" id="name" name="name" placeholder="First and last name" required>
-        </div>
-        <div>
-          <label class="field" for="phone">Best phone number</label>
-          <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
-        </div>
-      </div>
-      <div class="contact-row">
-        <div>
-          <label class="field" for="email">Best email to reach you at <span style="font-weight:400;color:var(--muted);">(your new one, if you know it)</span></label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required>
-        </div>
-        <div>
-          <label class="field" for="best_time">Best time of day to reach you</label>
-          <input type="text" id="best_time" name="best_time" placeholder="e.g., Mornings, after 5pm, weekends">
-        </div>
-      </div>
-    </div>
-
-    <!-- SUBMIT -->
-    <div class="actions">
-      <button type="submit" class="primary">📨 Send My Answers</button>
-      <button type="button" class="secondary" onclick="window.print()">🖨️ Print / Save as PDF</button>
-    </div>
-
     <div class="return-note">
-      <strong>Need help right now?</strong> Call either of us — we're happy to walk through this with you.<br>
+      <strong>That's it — pick the matching guide above for each device.</strong><br>
+      Stuck or want one of us to walk through it with you? Call either of us — happy to do it on the phone or sit down in person.<br>
       <strong>Ryan Crosby</strong> — <a href="tel:9853732383" style="color:#713f12;">985-373-2383</a> &nbsp;·&nbsp;
       <strong>HJ Crosby</strong> — <a href="tel:5048586547" style="color:#713f12;">504-858-6547</a><br>
       Or email <a href="mailto:ryan@crosbydevelopment.com" style="color:#713f12;font-weight:700;">ryan@crosbydevelopment.com</a>.
     </div>
 
-  </form>
+  </section>
 
 </div>
 
@@ -1408,5 +1378,23 @@
     });
   });
 </script>
+
+<div class="help-widget" id="helpWidget">
+  <div class="help-widget-card">
+    <div class="title">Need a hand?
+      <button type="button" aria-label="Minimize" onclick="document.getElementById('helpWidget').classList.add('collapsed')">−</button>
+    </div>
+    <a class="help-widget-call" href="tel:9853732383">
+      <span class="icon">📞</span>
+      <span><span class="who">Call Ryan</span><span class="num">985-373-2383</span></span>
+    </a>
+    <a class="help-widget-call" href="tel:5048586547">
+      <span class="icon">📞</span>
+      <span><span class="who">Call HJ</span><span class="num">504-858-6547</span></span>
+    </a>
+  </div>
+  <button class="help-widget-pill" type="button" aria-label="Show help" onclick="document.getElementById('helpWidget').classList.remove('collapsed')">📞 Need help?</button>
+</div>
+
 </body>
 </html>
