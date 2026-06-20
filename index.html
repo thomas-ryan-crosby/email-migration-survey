@@ -643,6 +643,58 @@
     background: var(--accent-soft);
   }
 
+  /* Highlight the very first comfort-check question */
+  .device-block.first-step .device-title h3 { color: var(--accent); }
+  .device-block.first-step .device-title .sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+  /* Inline tablet-equivalence note inside the "Any other device?" block */
+  .tablet-note {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent-2);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 4px 0 18px;
+    font-size: 15px;
+    color: #1e293b;
+  }
+  .tablet-note ul { margin: 8px 0; padding-left: 22px; }
+  .tablet-note ul li { margin-bottom: 4px; }
+
+  /* "Need someone to help" prompt card (rendered into .install-help-slot) */
+  .install-help-card {
+    margin-top: 14px;
+    background: linear-gradient(135deg, #22315d 0%, #1a274a 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 22px rgba(34, 49, 93, 0.25);
+  }
+  .install-help-card strong.headline {
+    display: block;
+    color: white;
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .install-help-card p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.92);
+  }
+  .install-help-card a.guide-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 800;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-right: 8px;
+  }
+  .install-help-card a.guide-link:hover { background: var(--accent-soft); }
+
   /* anti-spam honeypot, hidden from real users */
   .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
@@ -765,7 +817,25 @@
     </div>
 
     <h2>Now — tell us about your devices</h2>
-    <p>For each device, pick the <strong>one app you use most</strong> to check your email. If you don't use email on a device, pick "I don't use email here."</p>
+
+    <!-- FIRST STEP: comfort with installing apps -->
+    <div class="device-block first-step">
+      <div class="device-title">
+        <span class="device-emoji">📲</span>
+        <div>
+          <h3>First — do you know how to install apps on your phone?</h3>
+          <div class="sub">We just need to know your comfort level before we get into the details.</div>
+        </div>
+      </div>
+      <div class="help-grid" data-question="can_install">
+        <label class="choice"><input type="radio" name="can_install" value="Yes, no problem"><div class="icon-frame">✅</div><div class="label">Yes, no problem</div></label>
+        <label class="choice"><input type="radio" name="can_install" value="With written steps, probably"><div class="icon-frame">🤔</div><div class="label">With written steps, probably</div></label>
+        <label class="choice"><input type="radio" name="can_install" value="I'd rather have someone help me"><div class="icon-frame">🙋</div><div class="label">I'd rather have someone help me</div></label>
+      </div>
+      <div class="install-help-slot" data-for="can_install"></div>
+    </div>
+
+    <p style="margin-top:24px;">For each device below, pick the <strong>one app you use most</strong> to check your email. If you don't use email on a device, pick "I don't use email here."</p>
 
     <!-- BUSINESS COMPUTER -->
     <div class="device-block">
@@ -979,11 +1049,21 @@
         <span class="device-emoji">📟</span>
         <div>
           <h3>Any <u>other</u> device?</h3>
-          <div class="sub">Tablet, iPad, second phone, work laptop, etc. — leave blank if none.</div>
+          <div class="sub">Tablets, e-readers, second phone, work laptop — leave blank if none.</div>
         </div>
       </div>
+      <div class="tablet-note">
+        <strong>Good news — most tablets work like phones:</strong>
+        <ul>
+          <li><strong>iPad</strong> uses the <strong>iPhone</strong> steps</li>
+          <li><strong>Android tablet</strong> (Samsung Tab, etc.) uses the <strong>Android phone</strong> steps</li>
+          <li><strong>Mac laptop / iMac</strong> uses the <strong>Mac</strong> steps</li>
+          <li><strong>Chromebook</strong> just uses <strong>gmail.com in a browser</strong></li>
+        </ul>
+        Only fill this in for something <em>not</em> in the list above, or skip it.
+      </div>
       <label class="field" for="other_device_name">What is the device?</label>
-      <input type="text" id="other_device_name" name="other_device_name" placeholder="e.g., iPad, work tablet, second laptop">
+      <input type="text" id="other_device_name" name="other_device_name" placeholder="e.g., second laptop, work tablet">
       <div style="margin-top:14px;">
         <div class="choice-grid" data-question="other_device_app">
           <label class="choice"><input type="radio" name="other_device_app" value="N/A"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">N/A</div></label>
@@ -998,21 +1078,6 @@
         <div class="other-input" data-for="other_device_app">
           <input type="text" name="other_device_app_other_name" placeholder="What's the name of the app?">
         </div>
-      </div>
-    </div>
-
-    <!-- HELP COMFORT -->
-    <div class="device-block">
-      <div class="device-title">
-        <span class="device-emoji">🛠️</span>
-        <div>
-          <h3>Can you install apps on your phone by yourself?</h3>
-        </div>
-      </div>
-      <div class="help-grid" data-question="can_install">
-        <label class="choice"><input type="radio" name="can_install" value="Yes, no problem"><div class="icon-frame">✅</div><div class="label">Yes, no problem</div></label>
-        <label class="choice"><input type="radio" name="can_install" value="With written steps, probably"><div class="icon-frame">🤔</div><div class="label">With written steps, probably</div></label>
-        <label class="choice"><input type="radio" name="can_install" value="I'd need someone to help me"><div class="icon-frame">🙋</div><div class="label">I'd need someone to help me</div></label>
       </div>
     </div>
 
@@ -1101,6 +1166,26 @@
       if (e.target.type !== 'radio') return;
       grid.querySelectorAll('.path-choice').forEach(c => c.classList.remove('selected'));
       e.target.closest('.path-choice').classList.add('selected');
+    });
+  });
+
+  // First-step comfort check: if the user picks "I'd rather have someone help me",
+  // surface a card pointing them straight at Ryan/HJ for in-person setup.
+  document.querySelectorAll('input[name="can_install"]').forEach(input => {
+    input.addEventListener('change', () => {
+      const slot = document.querySelector('.install-help-slot[data-for="can_install"]');
+      if (!slot) return;
+      if (input.value === "I'd rather have someone help me") {
+        slot.innerHTML =
+          '<div class="install-help-card">' +
+            '<strong class="headline">📞 No problem — we\'ll come to you.</strong>' +
+            '<p>You don\'t need to finish the rest of this. Give Ryan or HJ a call and we\'ll sit down with you (or walk through it on the phone) and get your email working on every device.</p>' +
+            '<a class="guide-link" href="tel:9853732383">📞 Call Ryan · 985-373-2383</a>' +
+            '<a class="guide-link" href="tel:5048586547">📞 Call HJ · 504-858-6547</a>' +
+          '</div>';
+      } else {
+        slot.innerHTML = '';
+      }
     });
   });
 
