@@ -460,7 +460,7 @@
     margin-bottom: 14px;
   }
 
-  /* Two big "convert vs stay" cards */
+  /* Two big "convert vs stay" cards — styled like voting cards with a clear checkbox */
   .path-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -470,43 +470,67 @@
     display: block;
     position: relative;
     background: white;
-    border: 2px solid var(--line);
+    border: 2px solid #cbd5e1;
     border-radius: 14px;
-    padding: 16px 16px 14px;
+    padding: 18px 18px 16px 56px;
     cursor: pointer;
     transition: all 0.15s ease;
     user-select: none;
   }
-  .path-choice:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+  .path-choice:hover {
+    border-color: var(--accent-2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(34, 49, 93, 0.08);
+  }
   .path-choice input {
     position: absolute; opacity: 0; pointer-events: none;
   }
+  /* The big visible checkbox */
+  .path-check {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #94a3b8;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.15s ease;
+  }
+  .path-check::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    transition: transform 0.15s ease;
+  }
+  .path-choice:hover .path-check { border-color: var(--accent-2); }
   .path-choice.selected {
     border-color: var(--selected);
     background: var(--selected-soft);
     box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
   }
-  .path-choice.selected::after {
-    content: "✓";
-    position: absolute;
-    top: 8px; right: 10px;
-    width: 22px; height: 22px;
-    border-radius: 50%;
+  .path-choice.selected .path-check {
     background: var(--selected);
-    color: white;
-    font-size: 13px;
-    font-weight: 800;
-    display: flex; align-items: center; justify-content: center;
+    border-color: var(--selected);
   }
+  .path-choice.selected .path-check::after {
+    content: "✓";
+    transform: translate(-50%, -50%) scale(1);
+  }
+
   .path-title {
     font-weight: 800;
     font-size: 16px;
     color: var(--accent);
     margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    line-height: 1.3;
   }
+  .path-title .app-name { white-space: nowrap; }
   .path-choice ul {
     margin: 0 0 10px;
     padding-left: 20px;
@@ -515,13 +539,34 @@
   }
   .path-choice ul li { margin-bottom: 4px; }
   .path-meta {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
   }
-  .path-gmail .path-title { color: #b45309; }
-  .path-gmail { background: #fffbeb; border-color: #fde68a; }
-  .path-gmail.selected { background: var(--selected-soft); border-color: var(--selected); }
+  .path-choice.selected .path-meta { color: #14532d; border-top-color: rgba(22, 163, 74, 0.3); }
+
+  /* Gmail variant: subtle star prefix on the title (no yellow tint) */
+  .path-gmail .path-title::before {
+    content: "⭐ ";
+    margin-right: 4px;
+  }
+
+  /* "Pick one" prompt at the top of the path-grid */
+  .pick-one-hint {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .pick-one-hint::before {
+    content: "↓ ";
+  }
+
   @media (max-width: 560px) {
     .path-grid { grid-template-columns: 1fr; }
   }
@@ -746,28 +791,31 @@
       </div>
       <div class="path-followup" data-for="business_computer" style="display:none;">
         <span class="followup-label">Step 2</span>
-        <div class="followup-prompt">What would you like to do for Crosby email on this computer?</div>
-        <div class="followup-sub">No wrong answer — pick what fits your habits.</div>
+        <div class="followup-prompt">Which path fits you better on this computer?</div>
+        <div class="followup-sub">Check one of the two cards below — there's no wrong answer.</div>
+        <div class="pick-one-hint">Check one to continue</div>
         <div class="path-grid">
           <label class="path-choice path-gmail">
             <input type="radio" name="business_computer_choice" value="Switch to Gmail">
-            <div class="path-title">⭐ Switch to Gmail at gmail.com</div>
+            <span class="path-check"></span>
+            <div class="path-title">Switch to Gmail at gmail.com</div>
             <ul>
+              <li>Your Crosby email now lives on Google — Gmail is the most direct fit</li>
               <li>Nothing to install — works in any browser</li>
-              <li>Best fit since both ends are Google now</li>
-              <li>Same inbox at home, at work, anywhere</li>
+              <li>If your personal email is already a Gmail address, you'll have one tool for both</li>
             </ul>
-            <div class="path-meta">Best if Crosby is your main / only work email here.</div>
+            <div class="path-meta">✓ Check this if your personal email is already Gmail, or Crosby is your only email here.</div>
           </label>
           <label class="path-choice path-stay">
             <input type="radio" name="business_computer_choice" value="Stay with current app">
-            <div class="path-title">🔵 Stay with <span class="app-name"></span></div>
+            <span class="path-check"></span>
+            <div class="path-title">Stay with <span class="app-name"></span></div>
             <ul>
-              <li>Keep your other email accounts (AOL, Yahoo, etc.) in the same place</li>
+              <li>Keep your other personal emails (AOL, Yahoo, comcast.net, etc.) in the same app</li>
               <li>Familiar interface — nothing new to learn</li>
-              <li>Just point your existing app at the new Crosby server</li>
+              <li>We just point your existing app at the new Crosby server</li>
             </ul>
-            <div class="path-meta">Best if you manage multiple email accounts in this one app.</div>
+            <div class="path-meta">✓ Check this if you have other personal emails here, or you just like the app you're using.</div>
           </label>
         </div>
       </div>
@@ -808,28 +856,31 @@
       </div>
       <div class="path-followup" data-for="personal_computer" style="display:none;">
         <span class="followup-label">Step 2</span>
-        <div class="followup-prompt">What would you like to do for Crosby email on this computer?</div>
-        <div class="followup-sub">No wrong answer — pick what fits your habits.</div>
+        <div class="followup-prompt">Which path fits you better on this computer?</div>
+        <div class="followup-sub">Check one of the two cards below — there's no wrong answer.</div>
+        <div class="pick-one-hint">Check one to continue</div>
         <div class="path-grid">
           <label class="path-choice path-gmail">
             <input type="radio" name="personal_computer_choice" value="Switch to Gmail">
-            <div class="path-title">⭐ Switch to Gmail at gmail.com</div>
+            <span class="path-check"></span>
+            <div class="path-title">Switch to Gmail at gmail.com</div>
             <ul>
+              <li>Your Crosby email now lives on Google — Gmail is the most direct fit</li>
               <li>Nothing to install — works in any browser</li>
-              <li>Best fit since both ends are Google now</li>
-              <li>Same inbox at home, at work, anywhere</li>
+              <li>If your personal email is already a Gmail address, you'll have one tool for both</li>
             </ul>
-            <div class="path-meta">Best if Crosby is your main / only work email here.</div>
+            <div class="path-meta">✓ Check this if your personal email is already Gmail, or Crosby is your only email here.</div>
           </label>
           <label class="path-choice path-stay">
             <input type="radio" name="personal_computer_choice" value="Stay with current app">
-            <div class="path-title">🔵 Stay with <span class="app-name"></span></div>
+            <span class="path-check"></span>
+            <div class="path-title">Stay with <span class="app-name"></span></div>
             <ul>
-              <li>Keep your other email accounts (AOL, Yahoo, etc.) in the same place</li>
+              <li>Keep your other personal emails (AOL, Yahoo, comcast.net, etc.) in the same app</li>
               <li>Familiar interface — nothing new to learn</li>
-              <li>Just point your existing app at the new Crosby server</li>
+              <li>We just point your existing app at the new Crosby server</li>
             </ul>
-            <div class="path-meta">Best if you manage multiple email accounts in this one app.</div>
+            <div class="path-meta">✓ Check this if you have other personal emails here, or you just like the app you're using.</div>
           </label>
         </div>
       </div>
@@ -880,28 +931,31 @@
         </div>
         <div class="path-followup" data-for="phone_app" style="display:none;">
           <span class="followup-label">Step 2</span>
-          <div class="followup-prompt">What would you like to do for Crosby email on your phone?</div>
-          <div class="followup-sub">No wrong answer — pick what fits your habits.</div>
+          <div class="followup-prompt">Which path fits you better on your phone?</div>
+          <div class="followup-sub">Check one of the two cards below — there's no wrong answer.</div>
+          <div class="pick-one-hint">Check one to continue</div>
           <div class="path-grid">
             <label class="path-choice path-gmail">
               <input type="radio" name="phone_app_choice" value="Switch to Gmail app">
-              <div class="path-title">⭐ Switch to the Gmail app</div>
+              <span class="path-check"></span>
+              <div class="path-title">Switch to the Gmail app</div>
               <ul>
-                <li>Made by Google for Google Workspace email</li>
-                <li>You can sign in with your personal Gmail too and switch with one tap</li>
-                <li>Smoothest mobile experience</li>
+                <li>Made by Google for Google Workspace email — the most direct fit</li>
+                <li>If your personal email is already Gmail, both inboxes live in the same app</li>
+                <li>One tap to switch between personal and Crosby</li>
               </ul>
-              <div class="path-meta">Best if Crosby is your main work email on this phone.</div>
+              <div class="path-meta">✓ Check this if your personal email is already Gmail, or Crosby is your only email on this phone.</div>
             </label>
             <label class="path-choice path-stay">
               <input type="radio" name="phone_app_choice" value="Stay with current app">
-              <div class="path-title">🔵 Stay with <span class="app-name"></span></div>
+              <span class="path-check"></span>
+              <div class="path-title">Stay with <span class="app-name"></span></div>
               <ul>
-                <li>Keep your other email accounts (AOL, Yahoo, etc.) in one app</li>
+                <li>Keep your other personal emails (AOL, Yahoo, comcast.net, etc.) in the same app</li>
                 <li>Familiar interface — nothing new to learn</li>
-                <li>Just add Crosby alongside what's already there</li>
+                <li>We just add Crosby alongside what's already on your phone</li>
               </ul>
-              <div class="path-meta">Best if you manage multiple email accounts on your phone.</div>
+              <div class="path-meta">✓ Check this if you have other personal emails here, or you just like the app you're using.</div>
             </label>
           </div>
         </div>
@@ -1202,11 +1256,7 @@
 
     if (!choice) {
       hideSi();
-      setRec(
-        '<div class="guide-rec subtle">' +
-          '<p>Pick one of the two options above — we\'ll then point you at the exact guide.</p>' +
-        '</div>'
-      );
+      setRec(''); // visible voting cards above already prompt the user
       return;
     }
 
