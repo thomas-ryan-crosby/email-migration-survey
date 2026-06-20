@@ -297,7 +297,6 @@
   }
   @media (max-width: 560px) {
     .contact-row { grid-template-columns: 1fr; }
-    header.hero h1 { font-size: 26px; }
   }
 
   label.field {
@@ -765,9 +764,113 @@
   }
   .help-widget.collapsed .help-widget-card { display: none; }
   .help-widget.collapsed .help-widget-pill { display: inline-flex; align-items: center; gap: 8px; }
-  @media (max-width: 560px) {
+  /* === Mobile / phone tweaks === */
+  @media (max-width: 720px) {
+    html, body { font-size: 17px; }
+    .wrap { padding: 16px 14px 100px; }
+
+    header.hero { padding: 22px 20px 20px; border-radius: 14px; margin-bottom: 16px; }
+    header.hero h1 { font-size: 24px; }
+    header.hero p { font-size: 15px; line-height: 1.45; }
+
+    section.card { padding: 18px 16px; border-radius: 14px; margin-bottom: 14px; }
+    section.card h2 { font-size: 20px; line-height: 1.25; }
+
+    .callout, .change-block, .reco-block { padding: 14px 16px; font-size: 15px; }
+    .change-block h3, .reco-block h3 { font-size: 16px; }
+    .change-block p, .reco-block p { font-size: 15px; }
+
+    /* Tighter legend tiles */
+    .legend-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .legend-tile { padding: 12px 10px; }
+    .legend-tile .icon-frame { width: 56px; height: 56px; border-radius: 12px; margin-bottom: 8px; }
+    .legend-tile .icon-frame img { width: 44px; height: 44px; }
+    .legend-tile .name { font-size: 14px; }
+    .legend-tile .desc { font-size: 12px; }
+
+    /* Device blocks */
+    .device-block { margin-top: 18px; padding-top: 18px; }
+    .device-title { gap: 10px; margin-bottom: 12px; }
+    .device-emoji { font-size: 32px; }
+    .device-title h3 { font-size: 18px; line-height: 1.25; }
+    .device-title .sub { font-size: 14px; }
+
+    /* App-choice tiles: keep 2-up grid, tighter icons */
+    .choice-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .choice { padding: 10px 8px 12px; min-height: 110px; }
+    .choice .icon-frame { width: 52px; height: 52px; border-radius: 12px; margin: 2px auto 6px; }
+    .choice .icon-frame img { width: 40px; height: 40px; }
+    .choice .label { font-size: 13px; line-height: 1.2; }
+    .choice.selected::after { width: 20px; height: 20px; font-size: 12px; top: 5px; right: 6px; }
+
+    /* "Can install" 3-tile row → 1 column for legibility */
+    .help-grid { grid-template-columns: 1fr; gap: 8px; }
+    .help-grid .choice {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      align-items: center;
+      text-align: left;
+      gap: 10px;
+      padding: 12px 12px 12px 12px;
+      min-height: 0;
+    }
+    .help-grid .choice .icon-frame { width: 44px; height: 44px; margin: 0; font-size: 22px; }
+    .help-grid .choice .label { font-size: 15px; font-weight: 700; }
+
+    /* Path-followup card */
+    .path-followup, .signed-in-followup { padding: 14px 12px 12px; }
+    .path-grid { grid-template-columns: 1fr; gap: 10px; }
+    .path-choice { padding: 16px 16px 14px 48px; }
+    .path-check { top: 16px; left: 12px; width: 26px; height: 26px; }
+    .path-title { font-size: 15px; }
+    .path-choice ul { font-size: 14px; padding-left: 18px; }
+    .path-meta { font-size: 14px; padding: 10px 12px; }
+    .pick-one-hint { font-size: 12px; }
+    .followup-prompt { font-size: 16px; }
+    .followup-sub { font-size: 13px; }
+
+    /* "Removed old?" question is also stacked single-column */
+    .signed-in-grid { grid-template-columns: 1fr !important; gap: 8px; }
+    .signed-in-grid .choice {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      align-items: center;
+      text-align: left;
+      gap: 10px;
+      padding: 12px;
+      min-height: 0;
+    }
+    .signed-in-grid .choice .icon-frame { width: 36px; height: 36px; margin: 0; font-size: 20px; }
+    .signed-in-grid .choice .label { font-size: 14px; }
+
+    /* Guide-recommendation card */
+    .guide-rec { padding: 14px 14px; }
+    .guide-rec strong.headline { font-size: 15px; }
+    .guide-rec p { font-size: 14px; }
+    .guide-rec a.guide-link { display: block; text-align: center; margin-right: 0; margin-top: 8px; padding: 12px 16px; font-size: 15px; }
+
+    .install-help-card { padding: 16px 16px; }
+    .install-help-card strong.headline { font-size: 16px; }
+    .install-help-card p { font-size: 14px; }
+    .install-help-card a.guide-link { display: block; text-align: center; margin-right: 0; margin-top: 8px; }
+
+    /* Return-note at the very bottom */
+    .return-note { padding: 14px 14px; font-size: 14px; }
+
+    /* Floating widgets: tighter and collapsed-by-default on phones */
     .help-widget { bottom: 12px; right: 12px; }
-    .help-widget-card { width: calc(100vw - 32px); max-width: 280px; }
+    .help-widget-card { width: calc(100vw - 24px); max-width: 320px; }
+    .help-widget-pill { font-size: 14px; padding: 10px 16px; }
+  }
+
+  @media (max-width: 380px) {
+    header.hero h1 { font-size: 21px; }
+    section.card { padding: 16px 12px; }
+    section.card h2 { font-size: 18px; }
+    .device-title h3 { font-size: 16px; }
+    .choice { min-height: 100px; }
+    .choice .label { font-size: 12px; }
+    .legend-tile .name { font-size: 13px; }
   }
 
   @media print {
@@ -1395,6 +1498,15 @@
   </div>
   <button class="help-widget-pill" type="button" aria-label="Show help" onclick="document.getElementById('helpWidget').classList.remove('collapsed')">📞 Need help?</button>
 </div>
+<script>
+  // Auto-collapse the help widget into a pill on phones so it doesn't
+  // cover content. Users tap the pill to expand it.
+  (function () {
+    var w = document.getElementById('helpWidget');
+    if (!w) return;
+    if (window.matchMedia('(max-width: 720px)').matches) w.classList.add('collapsed');
+  })();
+</script>
 
 </body>
 </html>

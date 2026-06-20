@@ -224,6 +224,13 @@
   </div>
   <button class="help-widget-pill" type="button" aria-label="Show help" onclick="document.getElementById('helpWidget').classList.remove('collapsed')">📞 Need help?</button>
 </div>
+<script>
+  (function () {
+    var w = document.getElementById('helpWidget');
+    if (!w) return;
+    if (window.matchMedia('(max-width: 720px)').matches) w.classList.add('collapsed');
+  })();
+</script>
 
 </body>
 </html>

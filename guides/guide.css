@@ -437,12 +437,44 @@ table.tbl th {
 .help-widget.collapsed .help-widget-card { display: none; }
 .help-widget.collapsed .help-widget-pill { display: inline-flex; align-items: center; gap: 8px; }
 
-@media (max-width: 560px) {
-  header.hero h1 { font-size: 22px; }
-  .step { grid-template-columns: 44px 1fr; gap: 12px; }
-  .step .num { width: 36px; height: 36px; font-size: 16px; }
+/* Tablet-and-down: tighten container padding and hero */
+@media (max-width: 720px) {
+  html, body { font-size: 16px; }
+  .wrap { padding: 16px 14px 100px; }
+  header.hero { padding: 22px 20px 20px; border-radius: 14px; margin-bottom: 16px; }
+  header.hero h1 { font-size: 24px; }
+  header.hero p { font-size: 15px; }
+  section.card { padding: 18px 16px; border-radius: 14px; margin-bottom: 14px; }
+  section.card h2 { font-size: 20px; }
+  .step { grid-template-columns: 40px 1fr; gap: 12px; margin: 14px 0; padding-top: 14px; }
+  .step .num { width: 36px; height: 36px; font-size: 15px; border-radius: 10px; }
+  .step .body h3 { font-size: 17px; }
+  .tip, .warn, .success { padding: 10px 12px; font-size: 14px; }
+  .actions a, .actions button { padding: 14px 18px; font-size: 16px; width: 100%; text-align: center; }
+  /* Allow the troubleshooting table to scroll sideways on narrow screens */
+  table.tbl { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: normal; }
+  table.tbl th, table.tbl td { padding: 9px 10px; font-size: 14px; }
+  figure.screenshot-figure figcaption { font-size: 12px; }
+  .ui-box { padding: 12px 14px; font-size: 13px; }
+  .brand-row .name { font-size: 14px; }
+  .brand-row img { width: 32px; height: 32px; }
+  .meta-row .chip { font-size: 12px; padding: 5px 10px; }
+  .help-footer { padding: 18px 18px; border-radius: 14px; }
+  .help-footer h3 { font-size: 16px; }
+}
+
+/* Phone: when the card IS shown, make sure it doesn't overflow.
+   By default we auto-collapse the widget into a pill on small screens
+   via a tiny inline script in each guide (see end of body). */
+@media (max-width: 720px) {
   .help-widget { bottom: 12px; right: 12px; }
-  .help-widget-card { width: calc(100vw - 32px); max-width: 280px; }
+  .help-widget-card { width: calc(100vw - 24px); max-width: 320px; }
+  .help-widget-pill { font-size: 14px; padding: 10px 16px; }
+}
+@media (max-width: 380px) {
+  header.hero h1 { font-size: 21px; }
+  .step .body h3 { font-size: 16px; }
+  section.card { padding: 16px 14px; }
 }
 
 @media print {
