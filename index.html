@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Setup Help Survey — Crosby Development</title>
+<meta name="description" content="Quick visual survey to help us get your email working after the Google Workspace migration.">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #22315d;        /* Crosby navy */
+    --accent-2: #5e8ed0;      /* Crosby blue */
+    --accent-soft: #e6edf7;
+    --selected: #16a34a;
+    --selected-soft: #dcfce7;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  header.hero {
+    background: linear-gradient(135deg, #22315d 0%, #5e8ed0 100%);
+    color: white;
+    border-radius: 18px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(34, 49, 93, 0.25);
+  }
+
+  header.hero h1 {
+    margin: 0 0 12px;
+    font-size: 34px;
+    line-height: 1.15;
+  }
+
+  header.hero p {
+    margin: 0;
+    font-size: 18px;
+    opacity: 0.95;
+  }
+
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  section.card h2 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-size: 24px;
+    color: var(--ink);
+  }
+
+  section.card p {
+    margin: 0 0 12px;
+    color: #374151;
+  }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent-2);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    color: #1e293b;
+    font-size: 17px;
+  }
+
+  /* Legend grid */
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .legend-tile {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    background: #fafafa;
+  }
+
+  .legend-tile .icon-frame {
+    margin: 0 auto 10px;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #f1f1f1;
+    overflow: hidden;
+  }
+
+  .legend-tile .icon-frame img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  .legend-tile .name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .legend-tile .desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Special inline icons (browser + none + other) — built with SVG inline */
+  .icon-browser, .icon-none, .icon-other, .icon-device {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-browser { background: #eef2ff; }
+  .icon-none    { background: #f3f4f6; border: 1px dashed #d1d5db; color:#9ca3af; font-size:28px; }
+  .icon-other   { background: #fef3c7; color:#b45309; font-weight:800; font-size:30px; }
+  .icon-device  { background: #f3f4f6; font-size: 32px; }
+
+  /* Device questions */
+  .device-block {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--line);
+  }
+  .device-block:first-of-type {
+    margin-top: 8px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .device-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .device-emoji {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .device-title h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .device-title .sub {
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 2px;
+  }
+
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .choice {
+    display: block;
+    cursor: pointer;
+    background: #fafafa;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 10px 14px;
+    text-align: center;
+    transition: all 0.15s ease;
+    user-select: none;
+    position: relative;
+  }
+
+  .choice:hover {
+    border-color: var(--accent-2);
+    background: white;
+  }
+
+  .choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .choice .icon-frame {
+    margin: 4px auto 8px;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #f1f1f1;
+    overflow: hidden;
+  }
+
+  .choice .icon-frame img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+
+  .choice .label {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .choice.selected {
+    border-color: var(--selected);
+    background: var(--selected-soft);
+    box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+  }
+
+  .choice.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--selected);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .other-input {
+    margin-top: 10px;
+    display: none;
+  }
+  .other-input.show { display: block; }
+  .other-input input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+
+  .help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .help-grid .choice .icon-frame {
+    font-size: 28px;
+    background: #f3f4f6;
+    border: 0;
+  }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media (max-width: 560px) {
+    .contact-row { grid-template-columns: 1fr; }
+    header.hero h1 { font-size: 26px; }
+  }
+
+  label.field {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  input[type="text"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+  input:focus { outline: none; border-color: var(--accent-2); }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  button {
+    cursor: pointer;
+    border: 0;
+    padding: 16px 22px;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 12px;
+    font-family: inherit;
+  }
+
+  button.primary {
+    background: var(--accent);
+    color: white;
+  }
+  button.primary:hover { background: #1a274a; }
+
+  button.secondary {
+    background: white;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  button.secondary:hover { background: var(--accent-soft); }
+
+  .return-note {
+    background: #fef9c3;
+    border-left: 4px solid #ca8a04;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 18px;
+    font-size: 16px;
+    color: #713f12;
+  }
+
+  /* anti-spam honeypot, hidden from real users */
+  .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+  @media print {
+    body { background: white; }
+    .actions, .no-print { display: none !important; }
+    section.card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    header.hero { background: white !important; color: var(--accent) !important; box-shadow: none; border: 1px solid #ddd; }
+    .choice { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>📧 Help Us Help You: Email Setup Survey</h1>
+    <p>We just moved everyone's email over to <strong>Google Workspace</strong>. To make sure you can keep reading and sending email on all your devices, we'd like to know how you check email today. This will take about 2 minutes.</p>
+  </header>
+
+  <!-- EXPLAINER -->
+  <section class="card">
+    <h2>First — what is an "email app"?</h2>
+    <p>An <strong>email app</strong> (sometimes called an "email client" or "email management system") is simply the program you open to read and send your email. Think of it like a mailbox app: the mail itself lives at the post office (the email server), and the app on your device is how you go look at it.</p>
+    <p>You might use <strong>one app on your computer</strong>, a <strong>different one on your phone</strong>, and sometimes a <strong>website in a browser</strong>. All of them can show the <em>same</em> email account — they're just different windows into it.</p>
+    <div class="callout">
+      <strong>Why we're asking:</strong> Each app needs slightly different steps to connect to the new Google Workspace email. If we know which ones you use, we can give you the exact step-by-step guide for your situation.
+    </div>
+  </section>
+
+  <!-- LEGEND -->
+  <section class="card">
+    <h2>The common email apps you'll see below</h2>
+    <p>Take a quick look so you can recognize them in the next section. Don't worry if you don't see your icon exactly — there's an "Other" option too.</p>
+    <div class="legend-grid">
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/outlook-classic.svg" alt="Outlook Classic"></div>
+        <div class="name">Outlook (Classic)</div>
+        <div class="desc">The traditional Outlook desktop app from Microsoft</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook New"></div>
+        <div class="name">Outlook (New)</div>
+        <div class="desc">The redesigned Outlook with a lighter blue look</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/apple-mail.svg" alt="Apple Mail"></div>
+        <div class="name">Apple Mail</div>
+        <div class="desc">Built in on iPhone, iPad, and Mac</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/gmail.svg" alt="Gmail"></div>
+        <div class="name">Gmail</div>
+        <div class="desc">Google's email app or gmail.com in a browser</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/yahoo-mail.png" alt="Yahoo Mail"></div>
+        <div class="name">Yahoo Mail</div>
+        <div class="desc">Yahoo's email app or yahoo.com in a browser</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><img src="icons/samsung-email.png" alt="Samsung Email"></div>
+        <div class="name">Samsung Email</div>
+        <div class="desc">Built-in email app on Samsung phones</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        </div>
+        <div class="name">Webmail (old)</div>
+        <div class="desc">webmail.websrvcs.com — the old Rackspace website</div>
+      </div>
+
+      <div class="legend-tile">
+        <div class="icon-frame"><span class="icon-other">?</span></div>
+        <div class="name">Something else</div>
+        <div class="desc">Pick "Other" and tell us the name</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE SURVEY -->
+  <form id="survey" class="card"
+        action="https://formsubmit.co/ryan@crosbydevelopment.com"
+        method="POST">
+
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_cc" value="harryjr@crosbydevelopment.com">
+    <input type="hidden" name="_subject" value="📧 Email Setup Survey response">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_autoresponse" value="Thanks — we got your survey. Someone from Crosby Development will reach out to help get your email set up.">
+    <!-- Honeypot (real users won't fill this) -->
+    <div class="honeypot" aria-hidden="true">
+      <label>Leave this empty: <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <h2>Now — tell us about your devices</h2>
+    <p>For each device, pick the <strong>one app you use most</strong> to check your email. If you don't use email on a device, pick "I don't use email here."</p>
+
+    <!-- BUSINESS COMPUTER -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">💼</span>
+        <div>
+          <h3>On my <u>business</u> computer</h3>
+          <div class="sub">The desktop or laptop you use for work</div>
+        </div>
+      </div>
+      <div class="choice-grid" data-question="business_computer">
+        <label class="choice"><input type="radio" name="business_computer" value="I don't use email here"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">I don't use email here</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Outlook (Classic)"><div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div><div class="label">Outlook (Classic)</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Outlook (New)"><div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div><div class="label">Outlook (New)</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Apple Mail"><div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div><div class="label">Apple Mail</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Gmail"><div class="icon-frame"><img src="icons/gmail.svg" alt=""></div><div class="label">Gmail</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Yahoo Mail"><div class="icon-frame"><img src="icons/yahoo-mail.png" alt=""></div><div class="label">Yahoo Mail</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Webmail website"><div class="icon-frame"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div class="label">Webmail website</div></label>
+        <label class="choice"><input type="radio" name="business_computer" value="Other"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Other</div></label>
+      </div>
+      <div class="other-input" data-for="business_computer">
+        <input type="text" name="business_computer_other_name" placeholder="What's the name of the app?">
+      </div>
+    </div>
+
+    <!-- PERSONAL COMPUTER -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">🏠</span>
+        <div>
+          <h3>On my <u>personal</u> computer</h3>
+          <div class="sub">A home desktop or laptop you use for yourself</div>
+        </div>
+      </div>
+      <div class="choice-grid" data-question="personal_computer">
+        <label class="choice"><input type="radio" name="personal_computer" value="I don't use email here"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">I don't use email here</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Outlook (Classic)"><div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div><div class="label">Outlook (Classic)</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Outlook (New)"><div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div><div class="label">Outlook (New)</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Apple Mail"><div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div><div class="label">Apple Mail</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Gmail"><div class="icon-frame"><img src="icons/gmail.svg" alt=""></div><div class="label">Gmail</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Yahoo Mail"><div class="icon-frame"><img src="icons/yahoo-mail.png" alt=""></div><div class="label">Yahoo Mail</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Webmail website"><div class="icon-frame"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div class="label">Webmail website</div></label>
+        <label class="choice"><input type="radio" name="personal_computer" value="Other"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Other</div></label>
+      </div>
+      <div class="other-input" data-for="personal_computer">
+        <input type="text" name="personal_computer_other_name" placeholder="What's the name of the app?">
+      </div>
+    </div>
+
+    <!-- PHONE -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">📱</span>
+        <div>
+          <h3>On my <u>phone</u></h3>
+          <div class="sub">First — what kind of phone do you have?</div>
+        </div>
+      </div>
+
+      <div class="choice-grid" data-question="phone_type" style="grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));">
+        <label class="choice"><input type="radio" name="phone_type" value="iPhone"><div class="icon-frame"><span class="icon-device">📱</span></div><div class="label">iPhone</div></label>
+        <label class="choice"><input type="radio" name="phone_type" value="Android"><div class="icon-frame"><span class="icon-device">📱</span></div><div class="label">Android (Samsung, Google, etc.)</div></label>
+        <label class="choice"><input type="radio" name="phone_type" value="Not sure"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Not sure</div></label>
+        <label class="choice"><input type="radio" name="phone_type" value="I don't check email on my phone"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">I don't check email on my phone</div></label>
+      </div>
+
+      <div style="margin-top:22px;">
+        <div style="margin-bottom:10px;color:var(--muted);font-size:15px;">And which app do you open to read email on it?</div>
+        <div class="choice-grid" data-question="phone_app">
+          <label class="choice"><input type="radio" name="phone_app" value="I don't use email here"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">I don't use email here</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Apple Mail"><div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div><div class="label">Apple Mail</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Gmail"><div class="icon-frame"><img src="icons/gmail.svg" alt=""></div><div class="label">Gmail</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Outlook"><div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div><div class="label">Outlook</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Yahoo Mail"><div class="icon-frame"><img src="icons/yahoo-mail.png" alt=""></div><div class="label">Yahoo Mail</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Samsung Email"><div class="icon-frame"><img src="icons/samsung-email.png" alt=""></div><div class="label">Samsung Email</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Webmail website"><div class="icon-frame"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div class="label">Webmail website</div></label>
+          <label class="choice"><input type="radio" name="phone_app" value="Other"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Other</div></label>
+        </div>
+        <div class="other-input" data-for="phone_app">
+          <input type="text" name="phone_app_other_name" placeholder="What's the name of the app?">
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER DEVICE -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">📟</span>
+        <div>
+          <h3>Any <u>other</u> device?</h3>
+          <div class="sub">Tablet, iPad, second phone, work laptop, etc. — leave blank if none.</div>
+        </div>
+      </div>
+      <label class="field" for="other_device_name">What is the device?</label>
+      <input type="text" id="other_device_name" name="other_device_name" placeholder="e.g., iPad, work tablet, second laptop">
+      <div style="margin-top:14px;">
+        <div class="choice-grid" data-question="other_device_app">
+          <label class="choice"><input type="radio" name="other_device_app" value="N/A"><div class="icon-frame"><span class="icon-none">—</span></div><div class="label">N/A</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Outlook (Classic)"><div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div><div class="label">Outlook (Classic)</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Outlook (New)"><div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div><div class="label">Outlook (New)</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Apple Mail"><div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div><div class="label">Apple Mail</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Gmail"><div class="icon-frame"><img src="icons/gmail.svg" alt=""></div><div class="label">Gmail</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Yahoo Mail"><div class="icon-frame"><img src="icons/yahoo-mail.png" alt=""></div><div class="label">Yahoo Mail</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Webmail website"><div class="icon-frame"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div><div class="label">Webmail website</div></label>
+          <label class="choice"><input type="radio" name="other_device_app" value="Other"><div class="icon-frame"><span class="icon-other">?</span></div><div class="label">Other</div></label>
+        </div>
+        <div class="other-input" data-for="other_device_app">
+          <input type="text" name="other_device_app_other_name" placeholder="What's the name of the app?">
+        </div>
+      </div>
+    </div>
+
+    <!-- HELP COMFORT -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">🛠️</span>
+        <div>
+          <h3>Can you install apps on your phone by yourself?</h3>
+        </div>
+      </div>
+      <div class="help-grid" data-question="can_install">
+        <label class="choice"><input type="radio" name="can_install" value="Yes, no problem"><div class="icon-frame">✅</div><div class="label">Yes, no problem</div></label>
+        <label class="choice"><input type="radio" name="can_install" value="With written steps, probably"><div class="icon-frame">🤔</div><div class="label">With written steps, probably</div></label>
+        <label class="choice"><input type="radio" name="can_install" value="I'd need someone to help me"><div class="icon-frame">🙋</div><div class="label">I'd need someone to help me</div></label>
+      </div>
+    </div>
+
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">📬</span>
+        <div>
+          <h3>How would you like the setup guide?</h3>
+        </div>
+      </div>
+      <div class="help-grid" data-question="guide_format">
+        <label class="choice"><input type="radio" name="guide_format" value="Emailed PDF"><div class="icon-frame">📧</div><div class="label">Emailed PDF</div></label>
+        <label class="choice"><input type="radio" name="guide_format" value="Printed paper handout"><div class="icon-frame">📄</div><div class="label">Printed paper handout</div></label>
+        <label class="choice"><input type="radio" name="guide_format" value="Phone call walk-through"><div class="icon-frame">📞</div><div class="label">Phone call walk-through</div></label>
+        <label class="choice"><input type="radio" name="guide_format" value="In-person help"><div class="icon-frame">🤝</div><div class="label">In-person help</div></label>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="device-block">
+      <div class="device-title">
+        <span class="device-emoji">👋</span>
+        <div>
+          <h3>Who are you, and how can we reach you?</h3>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div>
+          <label class="field" for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="First and last name" required>
+        </div>
+        <div>
+          <label class="field" for="phone">Best phone number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+        </div>
+      </div>
+      <div class="contact-row">
+        <div>
+          <label class="field" for="email">Best email to reach you at <span style="font-weight:400;color:var(--muted);">(your new one, if you know it)</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label class="field" for="best_time">Best time of day to reach you</label>
+          <input type="text" id="best_time" name="best_time" placeholder="e.g., Mornings, after 5pm, weekends">
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="actions">
+      <button type="submit" class="primary">📨 Send My Answers</button>
+      <button type="button" class="secondary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+
+    <div class="return-note">
+      <strong>Need help right now?</strong> Call or text us, or email <strong>ryan@crosbydevelopment.com</strong>. We're happy to walk through this with you.
+    </div>
+
+  </form>
+
+</div>
+
+<script>
+  // Highlight selected choice tile + show "other" text box when needed.
+  document.querySelectorAll('.choice-grid, .help-grid').forEach(grid => {
+    grid.addEventListener('change', e => {
+      if (e.target.type !== 'radio') return;
+      const name = e.target.name;
+      grid.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+      e.target.closest('.choice').classList.add('selected');
+
+      const otherBox = document.querySelector('.other-input[data-for="' + name + '"]');
+      if (otherBox) {
+        if (e.target.value === 'Other') otherBox.classList.add('show');
+        else otherBox.classList.remove('show');
+      }
+    });
+  });
+</script>
+</body>
+</html>
