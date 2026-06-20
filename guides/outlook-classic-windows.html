@@ -9,8 +9,6 @@
 <body>
 <div class="wrap">
 
-  <div class="crumbs"><a href="/help">← All setup guides</a></div>
-
   <header class="hero">
     <div class="brand-row" style="margin-bottom:12px;">
       <img src="../icons/outlook-classic.svg" alt="">
@@ -187,9 +185,27 @@
 
   <div class="actions">
     <button class="primary" onclick="window.print()">🖨 Print / Save as PDF</button>
-    <a class="secondary" href="/help">← Back to all guides</a>
+    <a class="secondary" href="/">← Back to the survey</a>
   </div>
 
 </div>
+
+<div class="help-widget" id="helpWidget">
+  <div class="help-widget-card">
+    <div class="title">Need a hand?
+      <button type="button" aria-label="Minimize" onclick="document.getElementById('helpWidget').classList.add('collapsed')">−</button>
+    </div>
+    <a class="help-widget-call" href="tel:9853732383">
+      <span class="icon">📞</span>
+      <span><span class="who">Call Ryan</span><span class="num">985-373-2383</span></span>
+    </a>
+    <a class="help-widget-call" href="tel:5048586547">
+      <span class="icon">📞</span>
+      <span><span class="who">Call HJ</span><span class="num">504-858-6547</span></span>
+    </a>
+  </div>
+  <button class="help-widget-pill" type="button" aria-label="Show help" onclick="document.getElementById('helpWidget').classList.remove('collapsed')">📞 Need help?</button>
+</div>
+
 </body>
 </html>

@@ -265,10 +265,93 @@ table.tbl th {
 .actions .primary { background: var(--accent); color: white; }
 .actions .secondary { background: white; color: var(--accent); border: 2px solid var(--accent); }
 
+/* Floating "Need help?" widget — appears on every guide, hidden on print */
+.help-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.help-widget-card {
+  background: var(--accent);
+  color: white;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 14px 32px rgba(34, 49, 93, 0.4);
+  width: 260px;
+  border: 2px solid #1a274a;
+}
+.help-widget-card .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: 0.88;
+  margin-bottom: 10px;
+}
+.help-widget-card .title button {
+  background: rgba(255,255,255,0.18);
+  border: 0;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+}
+.help-widget-card .title button:hover { background: rgba(255,255,255,0.3); }
+.help-widget-call {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.help-widget-call:last-child { margin-bottom: 0; }
+.help-widget-call .icon {
+  font-size: 18px;
+  width: 32px; height: 32px;
+  background: var(--accent-soft);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.help-widget-call .who { display: block; font-size: 14px; line-height: 1.15; }
+.help-widget-call .num { display: block; font-size: 13px; opacity: 0.7; font-weight: 600; }
+.help-widget-pill {
+  display: none;
+  background: var(--accent);
+  color: white;
+  border: 2px solid #1a274a;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 999px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 0 14px 32px rgba(34, 49, 93, 0.4);
+}
+.help-widget.collapsed .help-widget-card { display: none; }
+.help-widget.collapsed .help-widget-pill { display: inline-flex; align-items: center; gap: 8px; }
+
 @media (max-width: 560px) {
   header.hero h1 { font-size: 22px; }
   .step { grid-template-columns: 44px 1fr; gap: 12px; }
   .step .num { width: 36px; height: 36px; font-size: 16px; }
+  .help-widget { bottom: 12px; right: 12px; }
+  .help-widget-card { width: calc(100vw - 32px); max-width: 280px; }
 }
 
 @media print {
@@ -285,4 +368,5 @@ table.tbl th {
   .btn-mock.ghost { background: white !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
   .screenshot { box-shadow: none !important; max-width: 520px; }
   figure.screenshot-figure { page-break-inside: avoid; }
+  .help-widget { display: none !important; }
 }
