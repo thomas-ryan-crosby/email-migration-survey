@@ -265,6 +265,63 @@ table.tbl th {
 .actions .primary { background: var(--accent); color: white; }
 .actions .secondary { background: white; color: var(--accent); border: 2px solid var(--accent); }
 
+/* Pinned top-right pill linking to Google's official version of these steps */
+.google-ref-fab {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  background: white;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  border: 1px solid #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.2;
+  transition: all 0.15s ease;
+}
+.google-ref-fab:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+}
+.google-ref-fab .g-mark {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4285F4 0%, #34A853 33%, #FBBC05 66%, #EA4335 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  flex-shrink: 0;
+}
+.google-ref-fab .ref-arrow {
+  color: var(--muted);
+  font-weight: 800;
+}
+.google-ref-fab .ref-text small {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+@media (max-width: 560px) {
+  .google-ref-fab { padding: 8px 12px 8px 10px; font-size: 12px; }
+  .google-ref-fab .ref-text small { display: none; }
+}
+
 /* Floating "Need help?" widget — appears on every guide, hidden on print */
 .help-widget {
   position: fixed;
@@ -369,4 +426,5 @@ table.tbl th {
   .screenshot { box-shadow: none !important; max-width: 520px; }
   figure.screenshot-figure { page-break-inside: avoid; }
   .help-widget { display: none !important; }
+  .google-ref-fab { display: none !important; }
 }
