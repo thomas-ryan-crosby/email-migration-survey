@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Mail on Mac — Crosby Email Setup</title>
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumbs"><a href="/help">← All setup guides</a></div>
+
+  <header class="hero">
+    <div class="brand-row" style="margin-bottom:12px;">
+      <img src="../icons/apple-mail.svg" alt="">
+      <div class="name">Apple Mail for Mac</div>
+    </div>
+    <div class="eyebrow">Setup Guide</div>
+    <h1>Adding your Crosby email to Apple Mail on a Mac</h1>
+    <p>Step-by-step walkthrough for connecting your <strong>@crosbydevelopment.com</strong> Workspace email to the Mail app on a MacBook or iMac.</p>
+    <div class="meta-row">
+      <span class="chip">⏱ <strong>~4 min</strong></span>
+      <span class="chip">📝 Need: email + password</span>
+      <span class="chip">🔐 Have 2FA ready</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>Before you start</h2>
+    <ul>
+      <li>The Mail app icon is a <strong>light blue square with a white envelope</strong>. It's in your Dock or the Applications folder.</li>
+      <li>If you've never had Crosby email on this Mac, skip Phase 1 and go straight to Phase 2.</li>
+      <li>If the <strong>old @crosbydevelopment.com</strong> account is already in Mail (connecting through Rackspace), do Phase 1 first to remove it.</li>
+    </ul>
+    <div class="tip"><strong>macOS version note:</strong> On newer Macs (Ventura, Sonoma, Sequoia+) the settings app is called <strong>System Settings</strong>. On older Macs (Monterey or earlier) it's called <strong>System Preferences</strong>. They work the same way for these steps.</div>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="card">
+    <h2 class="phase">Phase 1 — Remove the old account <small style="color:var(--muted);font-size:14px;font-weight:400;">(skip if you've never set up Crosby email here)</small></h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Open System Settings</h3>
+        <p>Click the <strong>Apple menu</strong> () in the top-left corner of the screen, then choose <strong>System Settings…</strong> (or <em>System Preferences…</em> on older Macs).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>Go to Internet Accounts</h3>
+        <p>In the sidebar, scroll down and click <span class="path">Internet Accounts</span>.</p>
+        <div class="ui-box light">
+          <div class="row"><span class="label">🌐 Internet Accounts</span> <span class="arrow">›</span></div>
+          <div class="row"><span class="label">🔔 Notifications</span> <span class="arrow">›</span></div>
+          <div class="row"><span class="label">🔒 Privacy & Security</span> <span class="arrow">›</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Click the old account</h3>
+        <p>Find the one labeled <strong>yourname@crosbydevelopment.com</strong> with "Mail" underneath. Click it once to select.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Delete it</h3>
+        <p>Click <span class="btn-mock danger">Delete Account…</span> (or the <strong>—</strong> button at the bottom on older Macs). Confirm when prompted.</p>
+        <div class="warn"><strong>Your email is not being deleted</strong> — only this Mac's connection to the old server. We'll reconnect through Google in Phase 2.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="card">
+    <h2 class="phase">Phase 2 — Add your Workspace account</h2>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>Click Add Account</h3>
+        <p>Still in <strong>Internet Accounts</strong>, click <span class="btn-mock">Add Account…</span> at the bottom of the list.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <div class="body">
+        <h3>Choose Google</h3>
+        <p>From the provider list, click <strong>Google</strong>.</p>
+        <div class="ui-box light">
+          <div style="text-align:center;padding:20px 0;font-weight:700;font-size:16px;">iCloud · Microsoft Exchange · <span style="color:var(--accent);text-decoration:underline;">Google</span> · Yahoo! · AOL · Microsoft Outlook · Other Account</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">7</div>
+      <div class="body">
+        <h3>Allow the browser to open</h3>
+        <p>You'll see a popup that says <em>"Safari (or your default browser) wants to use accounts.google.com to sign in."</em> Click <strong>Continue</strong>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">8</div>
+      <div class="body">
+        <h3>Enter your Crosby email</h3>
+        <p>On the Google sign-in page, type your full address — <strong>yourname@crosbydevelopment.com</strong> — and click <strong>Next</strong>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">9</div>
+      <div class="body">
+        <h3>Enter your password</h3>
+        <p>Type your Workspace password and click <strong>Next</strong>. Complete 2FA if prompted.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">10</div>
+      <div class="body">
+        <h3>Allow macOS to access your Google Account</h3>
+        <p>Google shows the list of permissions macOS needs (Mail, Contacts, Calendar). Scroll to the bottom and click <span class="btn-mock">Continue</span>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">11</div>
+      <div class="body">
+        <h3>Choose what to sync</h3>
+        <p>macOS asks which Google services to use. Toggle on the ones you want — at minimum <strong>Mail</strong>. <strong>Calendars</strong> and <strong>Contacts</strong> are also useful. Click <strong>Done</strong>.</p>
+        <div class="ui-box">
+          <div class="row"><span class="label">✉ Mail</span> <span class="arrow" style="color:#22c55e;font-weight:700;">●</span></div>
+          <div class="row"><span class="label">👤 Contacts</span> <span class="arrow" style="color:#22c55e;font-weight:700;">●</span></div>
+          <div class="row"><span class="label">📅 Calendars</span> <span class="arrow" style="color:#22c55e;font-weight:700;">●</span></div>
+          <div class="row"><span class="label">📝 Notes</span> <span class="arrow" style="color:#64748b;">○</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">12</div>
+      <div class="body">
+        <h3>Open Mail</h3>
+        <p>Switch back to the Mail app (Dock or ⌘-Tab). Your Crosby account now appears in the sidebar and your inbox starts loading.</p>
+        <div class="success"><strong>✓ Done.</strong> New mail arrives instantly; older history backfills in the background — expect the full set within a few hours.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">13</div>
+      <div class="body">
+        <h3>Send a test email</h3>
+        <p>Click <strong>New Message</strong>, send yourself or a coworker a quick test, and confirm it arrives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="card">
+    <h2>Troubleshooting</h2>
+    <table class="tbl">
+      <tr><th>Symptom</th><th>Fix</th></tr>
+      <tr><td>"Couldn't find your Google Account"</td><td>Check spelling. If still failing, your Workspace account may not be ready yet — call us.</td></tr>
+      <tr><td>Password rejected</td><td>Click <em>Forgot password?</em>, or call us to reset.</td></tr>
+      <tr><td>Mail not appearing in the sidebar</td><td>System Settings → Internet Accounts → click the Google account → make sure the <strong>Mail</strong> toggle is on.</td></tr>
+      <tr><td>Old emails missing</td><td>Google backfills history in the background. Give it through the weekend.</td></tr>
+      <tr><td>Folders look strange (e.g., [Gmail]/All Mail)</td><td>That's Gmail's folder system mapping into Mail. Leave it as-is or hide folders you don't use.</td></tr>
+    </table>
+  </section>
+
+  <!-- HELP -->
+  <section class="help-footer">
+    <h3>Need a hand?</h3>
+    <p>Call either of us — we're happy to walk you through it or sit down with you.</p>
+    <p class="person">Ryan Crosby — <a href="tel:9853732383">985-373-2383</a></p>
+    <p class="person">HJ Crosby — <a href="tel:5048586547">504-858-6547</a></p>
+    <p style="margin-top:6px;">Or email <a href="mailto:ryan@crosbydevelopment.com">ryan@crosbydevelopment.com</a>.</p>
+  </section>
+
+  <div class="actions">
+    <button class="primary" onclick="window.print()">🖨 Print / Save as PDF</button>
+    <a class="secondary" href="/help">← Back to all guides</a>
+  </div>
+
+</div>
+</body>
+</html>

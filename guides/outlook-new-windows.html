@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outlook (New) on Windows — Crosby Email Setup</title>
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumbs"><a href="/help">← All setup guides</a></div>
+
+  <header class="hero">
+    <div class="brand-row" style="margin-bottom:12px;">
+      <img src="../icons/outlook-new.svg" alt="">
+      <div class="name">Outlook (New) for Windows</div>
+    </div>
+    <div class="eyebrow">Setup Guide</div>
+    <h1>Adding your Crosby email to the new Outlook for Windows</h1>
+    <p>Step-by-step walkthrough for connecting your <strong>@crosbydevelopment.com</strong> Workspace email to the new Outlook desktop app.</p>
+    <div class="meta-row">
+      <span class="chip">⏱ <strong>~5 min</strong></span>
+      <span class="chip">📝 Need: email + password</span>
+      <span class="chip">🔐 Have 2FA ready</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>Before you start</h2>
+    <ul>
+      <li>Open the <strong>new Outlook</strong> app — the icon is light blue and white. If you're using <strong>classic Outlook</strong> (darker blue square with a white envelope/O), use the <a href="outlook-classic-windows.html">classic Outlook guide</a> instead.</li>
+      <li>If you've never had Crosby email on this PC, skip Phase 1 and go straight to Phase 2.</li>
+      <li>If your <strong>old crosbydevelopment.com account</strong> was already in Outlook (it was connecting through Rackspace), do Phase 1 first to remove it cleanly.</li>
+    </ul>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="card">
+    <h2 class="phase">Phase 1 — Remove the old account <small style="color:var(--muted);font-size:14px;font-weight:400;">(skip if you've never set up Crosby email here)</small></h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Open Settings</h3>
+        <p>In the top-right corner of Outlook, click the <strong>⚙ gear icon</strong> to open Settings.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>Go to Accounts → Email accounts</h3>
+        <p>On the left side of the Settings window, click <span class="path">Accounts</span>, then <span class="path">Email accounts</span>.</p>
+        <div class="ui-box">
+          <div class="row"><span class="label">📧 Email accounts</span> <span class="arrow">›</span></div>
+          <div class="row"><span class="label">🔔 Notifications</span> <span class="arrow">›</span></div>
+          <div class="row"><span class="label">🗂 Storage</span> <span class="arrow">›</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Find the old account</h3>
+        <p>You'll see your existing accounts listed. Find the one labeled <strong>yourname@crosbydevelopment.com</strong> with "IMAP" or "POP" underneath it — that's the old Rackspace one.</p>
+        <p>Click <strong>Manage</strong> next to it.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Remove the account</h3>
+        <p>On the Manage screen, click <span class="btn-mock danger">Remove</span> at the bottom. Confirm when asked.</p>
+        <div class="warn"><strong>Don't worry about losing email</strong> — the messages live on the server. Removing the account here just disconnects this computer from the old server; we'll reconnect through the new Google server in Phase 2.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="card">
+    <h2 class="phase">Phase 2 — Add your Workspace account</h2>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>Open the Add account screen</h3>
+        <p>Still in Settings → <span class="path">Accounts</span> → <span class="path">Email accounts</span>. Click <span class="btn-mock">+ Add account</span> at the top.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <div class="body">
+        <h3>Enter your Crosby email</h3>
+        <p>Type your full address — <strong>yourname@crosbydevelopment.com</strong> — and click <span class="btn-mock">Continue</span>.</p>
+        <div class="ui-box light">
+          <div style="font-weight:700;margin-bottom:6px;">Suggested account</div>
+          <div style="padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;margin-bottom:8px;">yourname@crosbydevelopment.com</div>
+          <div style="text-align:right;"><span class="btn-mock">Continue</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">7</div>
+      <div class="body">
+        <h3>Sign in to Google</h3>
+        <p>A Google sign-in window opens (the page says <strong>accounts.google.com</strong> at the top). It already has your email filled in — click <strong>Next</strong>.</p>
+        <div class="tip"><strong>Seeing "Couldn't find your Google Account"?</strong> Double-check the spelling, then try again. If it still fails, your Workspace account may not be active yet — call us (numbers below).</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">8</div>
+      <div class="body">
+        <h3>Enter your password</h3>
+        <p>Type the password for your Workspace account and click <strong>Next</strong>. If 2-factor authentication (2FA) is on, complete the verification step (text code, phone tap, or authenticator app).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">9</div>
+      <div class="body">
+        <h3>Allow Outlook to access your account</h3>
+        <p>Google will ask if you trust Microsoft Outlook. Scroll through the list and click <span class="btn-mock">Continue</span> or <span class="btn-mock">Allow</span> at the bottom.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">10</div>
+      <div class="body">
+        <h3>Account added</h3>
+        <p>You'll be returned to Outlook with the new account in your sidebar. Close Settings.</p>
+        <div class="success"><strong>✓ Done.</strong> Your inbox will start populating — new mail arrives instantly, but older messages backfill in the background. Expect the full history to be ready within a few hours, and the weekend at the outside.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">11</div>
+      <div class="body">
+        <h3>Send a test email</h3>
+        <p>Click <strong>New mail</strong>, send a quick message to yourself or a coworker, and confirm it arrives. If it does, you're all set.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="card">
+    <h2>Troubleshooting</h2>
+    <table class="tbl">
+      <tr><th>Symptom</th><th>Fix</th></tr>
+      <tr><td>"Couldn't find your Google Account"</td><td>Check the spelling of your email. If still failing, the Workspace account may not be created yet — call Ryan or HJ (below).</td></tr>
+      <tr><td>Password rejected</td><td>Click <em>Forgot password?</em> on the Google sign-in screen, or call us to reset.</td></tr>
+      <tr><td>Stuck on the Google permissions screen</td><td>Scroll to the bottom of the popup — the <strong>Continue</strong> button is below the list of permissions.</td></tr>
+      <tr><td>New mail not coming in</td><td>Click the sync icon at the top of the message list, or close and reopen Outlook.</td></tr>
+      <tr><td>Old emails missing</td><td>Google is still backfilling — give it a few hours. New messages always arrive immediately.</td></tr>
+    </table>
+  </section>
+
+  <!-- HELP -->
+  <section class="help-footer">
+    <h3>Need a hand?</h3>
+    <p>Call either of us — we're happy to walk you through it or sit down with you.</p>
+    <p class="person">Ryan Crosby — <a href="tel:9853732383">985-373-2383</a></p>
+    <p class="person">HJ Crosby — <a href="tel:5048586547">504-858-6547</a></p>
+    <p style="margin-top:6px;">Or email <a href="mailto:ryan@crosbydevelopment.com">ryan@crosbydevelopment.com</a>.</p>
+  </section>
+
+  <div class="actions">
+    <button class="primary" onclick="window.print()">🖨 Print / Save as PDF</button>
+    <a class="secondary" href="/help">← Back to all guides</a>
+  </div>
+
+</div>
+</body>
+</html>

@@ -17,6 +17,8 @@
     --accent-soft: #e6edf7;
     --selected: #16a34a;
     --selected-soft: #dcfce7;
+    --gold: #b45309;
+    --gold-soft: #fef3c7;
   }
 
   * { box-sizing: border-box; }
@@ -32,10 +34,8 @@
 
   .wrap { max-width: 1000px; margin: 0 auto; padding: 24px 20px 80px; }
 
-  /* Top nav */
   nav.top {
-    display: flex;
-    gap: 8px;
+    display: flex; gap: 8px;
     background: white;
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -44,23 +44,13 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   nav.top a {
-    flex: 1;
-    text-align: center;
-    text-decoration: none;
-    color: var(--muted);
-    font-weight: 600;
-    padding: 12px 14px;
-    border-radius: 10px;
+    flex: 1; text-align: center; text-decoration: none;
+    color: var(--muted); font-weight: 600;
+    padding: 12px 14px; border-radius: 10px;
     transition: all 0.15s ease;
   }
-  nav.top a.active {
-    background: var(--accent);
-    color: white;
-  }
-  nav.top a:not(.active):hover {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
+  nav.top a.active { background: var(--accent); color: white; }
+  nav.top a:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
 
   header.hero {
     background: linear-gradient(135deg, #22315d 0%, #5e8ed0 100%);
@@ -84,7 +74,64 @@
   section.card h2 { margin: 0 0 12px; font-size: 22px; }
   section.card p  { margin: 0 0 14px; color: #374151; }
 
-  /* Scenario picker (tabs) */
+  /* Recommendation hero */
+  .reco {
+    background: linear-gradient(135deg, #fff9ed 0%, #fef3c7 100%);
+    border: 1px solid #fde68a;
+    border-radius: 18px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+  }
+  .reco .star {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .reco h2 { margin: 0 0 8px; color: #713f12; font-size: 22px; }
+  .reco p  { margin: 0 0 14px; color: #713f12; }
+
+  .reco-picks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .reco-pick {
+    background: white;
+    border: 2px solid #f59e0b;
+    border-radius: 14px;
+    padding: 16px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.15s ease;
+  }
+  .reco-pick:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(180, 83, 9, 0.2);
+  }
+  .reco-pick .icon-mini {
+    width: 48px; height: 48px;
+    background: white;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .reco-pick .icon-mini img { width: 40px; height: 40px; object-fit: contain; }
+  .reco-pick .what { font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .reco-pick .where { font-size: 13px; color: var(--muted); }
+
+  /* Tabs */
   .tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -95,29 +142,21 @@
     margin: 4px 0 22px;
   }
   .tab {
-    border: 0;
-    cursor: pointer;
+    border: 0; cursor: pointer;
     background: transparent;
     color: var(--muted);
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 12px;
-    border-radius: 10px;
-    text-align: center;
-    font-family: inherit;
+    font-weight: 700; font-size: 16px;
+    padding: 14px 12px; border-radius: 10px;
+    text-align: center; font-family: inherit;
     line-height: 1.25;
     transition: all 0.15s ease;
   }
   .tab small {
-    display: block;
-    font-weight: 500;
-    font-size: 13px;
-    margin-top: 2px;
-    opacity: 0.85;
+    display: block; font-weight: 500; font-size: 13px;
+    margin-top: 2px; opacity: 0.85;
   }
   .tab.active {
-    background: white;
-    color: var(--accent);
+    background: white; color: var(--accent);
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
   .tab:not(.active):hover { color: var(--accent); }
@@ -130,9 +169,7 @@
   }
 
   .guide-card {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    display: flex; flex-direction: column;
     background: white;
     border: 2px solid var(--line);
     border-radius: 16px;
@@ -141,128 +178,98 @@
     color: var(--ink);
     position: relative;
     transition: all 0.15s ease;
-    min-height: 200px;
+    min-height: 220px;
   }
 
-  .guide-card.available {
-    cursor: pointer;
-  }
+  .guide-card.available { cursor: pointer; }
   .guide-card.available:hover {
     border-color: var(--accent-2);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(34,49,93,0.12);
   }
+  .guide-card.recommended { border-color: #f59e0b; background: #fffbeb; }
+  .guide-card.recommended:hover { border-color: #d97706; }
 
-  .guide-card.coming-soon {
-    opacity: 0.62;
-    cursor: default;
-    background: #fafafa;
-  }
+  .guide-card.coming-soon { opacity: 0.62; cursor: default; background: #fafafa; }
 
   .guide-card .icon-frame {
-    width: 64px;
-    height: 64px;
+    width: 64px; height: 64px;
     border-radius: 14px;
     background: white;
     border: 1px solid #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin-bottom: 12px;
     overflow: hidden;
   }
-  .guide-card .icon-frame img {
-    width: 52px; height: 52px; object-fit: contain;
-  }
+  .guide-card .icon-frame img { width: 52px; height: 52px; object-fit: contain; }
 
   .guide-card .title {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.3;
-    margin-bottom: 4px;
+    font-weight: 700; font-size: 16px;
+    line-height: 1.3; margin-bottom: 4px;
   }
   .guide-card .device {
-    font-size: 13px;
-    color: var(--muted);
+    font-size: 13px; color: var(--muted);
     margin-bottom: 10px;
   }
 
   .guide-card .footer-row {
     margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     gap: 8px;
     padding-top: 10px;
     border-top: 1px dashed var(--line);
   }
 
   .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 999px;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.4px;
   }
-  .badge.live    { background: var(--selected-soft); color: #166534; }
-  .badge.soon    { background: #fef3c7; color: #92400e; }
-  .badge.format  { background: #eef2ff; color: #3730a3; }
+  .badge.live { background: var(--selected-soft); color: #166534; }
+  .badge.soon { background: #fef3c7; color: #92400e; }
+  .badge.reco { background: #fef3c7; color: var(--gold); border: 1px solid #fde68a; }
 
-  .open-arrow {
-    color: var(--accent-2);
-    font-weight: 800;
-    font-size: 18px;
-  }
+  .open-arrow { color: var(--accent-2); font-weight: 800; font-size: 18px; }
   .guide-card.coming-soon .open-arrow { color: var(--muted); }
 
+  /* Help banner */
   .help-banner {
-    background: #fef9c3;
-    border-left: 4px solid #ca8a04;
-    border-radius: 10px;
-    padding: 16px 18px;
+    background: linear-gradient(135deg, #22315d 0%, #1a274a 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 18px 22px;
     margin-top: 22px;
-    font-size: 16px;
-    color: #713f12;
   }
-  .help-banner a {
-    color: #713f12;
-    font-weight: 700;
-  }
+  .help-banner h3 { margin: 0 0 8px; font-size: 18px; }
+  .help-banner p { margin: 0 0 4px; opacity: 0.95; color: white; }
+  .help-banner .person { font-weight: 800; }
+  .help-banner a { color: white; }
 
-  /* Modal for coming-soon */
+  /* Modal */
   .modal-bg {
     position: fixed; inset: 0;
     background: rgba(15, 23, 42, 0.55);
     display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 20px; z-index: 100;
   }
   .modal-bg.show { display: flex; }
   .modal {
     background: white;
     border-radius: 18px;
     padding: 28px;
-    max-width: 480px;
-    width: 100%;
+    max-width: 480px; width: 100%;
     box-shadow: 0 30px 60px rgba(0,0,0,0.3);
   }
   .modal h3 { margin: 0 0 10px; font-size: 22px; }
-  .modal p  { margin: 0 0 18px; color: #374151; }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .modal p  { margin: 0 0 14px; color: #374151; }
+  .modal .person { font-weight: 800; margin: 0 0 4px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
   .modal button {
-    cursor: pointer;
-    border: 0;
-    padding: 12px 18px;
-    font-size: 15px;
-    font-weight: 700;
-    border-radius: 10px;
-    font-family: inherit;
+    cursor: pointer; border: 0;
+    padding: 12px 18px; font-size: 15px; font-weight: 700;
+    border-radius: 10px; font-family: inherit;
   }
   .modal button.primary { background: var(--accent); color: white; }
   .modal button.secondary { background: #f3f4f6; color: var(--ink); }
@@ -284,11 +291,35 @@
 
   <header class="hero">
     <h1>📘 Setup Guides</h1>
-    <p>Pick your situation, then your device. Each guide opens as a PDF you can follow along with on a second screen, print, or save for later.</p>
+    <p>Walk-throughs for getting your Crosby email working on each device. Each guide opens as a printable page you can follow along with on a second screen or save as a PDF.</p>
   </header>
 
+  <!-- RECOMMENDATION -->
+  <div class="reco">
+    <div class="star">⭐ Our recommendation</div>
+    <h2>No strong preference? Use Gmail.</h2>
+    <p>If you don't have a favorite email app, we recommend <strong>Gmail at gmail.com on your computer</strong> and the <strong>Gmail app on your phone</strong>. Since your email now lives on Google Workspace, the Google apps are the most direct, reliable fit — same company on both ends, nothing extra to configure.</p>
+    <p style="margin-bottom:6px;"><strong>If you'd rather stick with what you already use</strong> (Outlook, Apple Mail, etc.), keep scrolling — those guides are below.</p>
+    <div class="reco-picks">
+      <a class="reco-pick" href="guides/gmail-web.html">
+        <div class="icon-mini"><img src="icons/gmail.svg" alt=""></div>
+        <div>
+          <div class="what">Gmail at gmail.com</div>
+          <div class="where">On any computer · 1 min setup</div>
+        </div>
+      </a>
+      <a class="reco-pick" href="guides/gmail-mobile.html">
+        <div class="icon-mini"><img src="icons/gmail.svg" alt=""></div>
+        <div>
+          <div class="what">Gmail app</div>
+          <div class="where">iPhone / Android · 2 min setup</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
   <section class="card">
-    <h2>What's your situation?</h2>
+    <h2>Want to use the app you already know? Pick it below.</h2>
     <div class="tabs" role="tablist">
       <button class="tab active" data-target="first-time" role="tab" aria-selected="true">
         🆕 First-time setup
@@ -303,6 +334,26 @@
     <!-- FIRST-TIME SETUP GRID -->
     <div class="guide-grid" id="first-time">
 
+      <a class="guide-card available recommended" href="guides/gmail-web.html">
+        <div class="icon-frame"><img src="icons/gmail.svg" alt="Gmail"></div>
+        <div class="title">Gmail — sign in at gmail.com</div>
+        <div class="device">Any computer · browser</div>
+        <div class="footer-row">
+          <span class="badge reco">⭐ Recommended</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
+
+      <a class="guide-card available recommended" href="guides/gmail-mobile.html">
+        <div class="icon-frame"><img src="icons/gmail.svg" alt="Gmail"></div>
+        <div class="title">Gmail app — first-time setup</div>
+        <div class="device">iPhone / Android</div>
+        <div class="footer-row">
+          <span class="badge reco">⭐ Recommended</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
+
       <a class="guide-card available" href="guides/apple-mail-first-setup.pdf" target="_blank" rel="noopener">
         <div class="icon-frame"><img src="icons/apple-mail.svg" alt="Apple Mail"></div>
         <div class="title">Apple Mail — first-time setup</div>
@@ -313,65 +364,55 @@
         </div>
       </a>
 
-      <div class="guide-card coming-soon" data-app="Apple Mail (Mac)">
-        <div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div>
+      <a class="guide-card available" href="guides/apple-mail-mac.html">
+        <div class="icon-frame"><img src="icons/apple-mail.svg" alt="Apple Mail"></div>
         <div class="title">Apple Mail — first-time setup</div>
-        <div class="device">Mac (desktop)</div>
+        <div class="device">Mac (MacBook / iMac)</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Gmail web">
-        <div class="icon-frame"><img src="icons/gmail.svg" alt=""></div>
-        <div class="title">Gmail — first-time setup</div>
-        <div class="device">gmail.com in a browser</div>
-        <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
-        </div>
-      </div>
-
-      <div class="guide-card coming-soon" data-app="Gmail app">
-        <div class="icon-frame"><img src="icons/gmail.svg" alt=""></div>
-        <div class="title">Gmail app — first-time setup</div>
-        <div class="device">iPhone / Android</div>
-        <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
-        </div>
-      </div>
-
-      <div class="guide-card coming-soon" data-app="Outlook (Classic)">
-        <div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div>
-        <div class="title">Outlook (Classic) — first-time setup</div>
-        <div class="device">Windows desktop</div>
-        <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
-        </div>
-      </div>
-
-      <div class="guide-card coming-soon" data-app="Outlook (New)">
-        <div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div>
+      <a class="guide-card available" href="guides/outlook-new-windows.html">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook"></div>
         <div class="title">Outlook (New) — first-time setup</div>
         <div class="device">Windows desktop</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Outlook app">
-        <div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div>
+      <a class="guide-card available" href="guides/outlook-classic-windows.html">
+        <div class="icon-frame"><img src="icons/outlook-classic.svg" alt="Outlook"></div>
+        <div class="title">Outlook (Classic) — first-time setup</div>
+        <div class="device">Windows desktop</div>
+        <div class="footer-row">
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
+
+      <a class="guide-card available" href="guides/outlook-mobile.html">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook"></div>
         <div class="title">Outlook app — first-time setup</div>
         <div class="device">iPhone / Android</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
+
+      <a class="guide-card available" href="guides/outlook-web.html">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook"></div>
+        <div class="title">Outlook on the web — read me first</div>
+        <div class="device">outlook.com in a browser</div>
+        <div class="footer-row">
+          <span class="badge live">● Read me</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
 
       <div class="guide-card coming-soon" data-app="Samsung Email">
         <div class="icon-frame"><img src="icons/samsung-email.png" alt=""></div>
@@ -388,6 +429,26 @@
     <!-- SWITCHING FROM OLD ACCOUNT GRID -->
     <div class="guide-grid" id="switching" style="display:none;">
 
+      <a class="guide-card available recommended" href="guides/gmail-web.html">
+        <div class="icon-frame"><img src="icons/gmail.svg" alt="Gmail"></div>
+        <div class="title">Move to Gmail at gmail.com</div>
+        <div class="device">Any computer · browser</div>
+        <div class="footer-row">
+          <span class="badge reco">⭐ Recommended</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
+
+      <a class="guide-card available recommended" href="guides/gmail-mobile.html">
+        <div class="icon-frame"><img src="icons/gmail.svg" alt="Gmail"></div>
+        <div class="title">Move to the Gmail app</div>
+        <div class="device">iPhone / Android</div>
+        <div class="footer-row">
+          <span class="badge reco">⭐ Recommended</span>
+          <span class="open-arrow">Open →</span>
+        </div>
+      </a>
+
       <a class="guide-card available" href="guides/apple-mail-remove-and-re-add.pdf" target="_blank" rel="noopener">
         <div class="icon-frame"><img src="icons/apple-mail.svg" alt="Apple Mail"></div>
         <div class="title">Apple Mail — remove old, re-add via Google</div>
@@ -398,47 +459,47 @@
         </div>
       </a>
 
-      <div class="guide-card coming-soon" data-app="Apple Mail (Mac) switch">
-        <div class="icon-frame"><img src="icons/apple-mail.svg" alt=""></div>
+      <a class="guide-card available" href="guides/apple-mail-mac.html">
+        <div class="icon-frame"><img src="icons/apple-mail.svg" alt="Apple Mail"></div>
         <div class="title">Apple Mail — remove old, re-add via Google</div>
-        <div class="device">Mac (desktop)</div>
+        <div class="device">Mac (MacBook / iMac)</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Outlook Classic switch">
-        <div class="icon-frame"><img src="icons/outlook-classic.svg" alt=""></div>
+      <a class="guide-card available" href="guides/outlook-classic-windows.html">
+        <div class="icon-frame"><img src="icons/outlook-classic.svg" alt="Outlook"></div>
         <div class="title">Outlook (Classic) — remove old, re-add via Google</div>
         <div class="device">Windows desktop</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Outlook New switch">
-        <div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div>
+      <a class="guide-card available" href="guides/outlook-new-windows.html">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook"></div>
         <div class="title">Outlook (New) — remove old, re-add via Google</div>
         <div class="device">Windows desktop</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Outlook app switch">
-        <div class="icon-frame"><img src="icons/outlook-new.svg" alt=""></div>
+      <a class="guide-card available" href="guides/outlook-mobile.html">
+        <div class="icon-frame"><img src="icons/outlook-new.svg" alt="Outlook"></div>
         <div class="title">Outlook app — remove old, re-add via Google</div>
         <div class="device">iPhone / Android</div>
         <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
+          <span class="badge live">● Ready</span>
+          <span class="open-arrow">Open →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="guide-card coming-soon" data-app="Samsung Email switch">
+      <div class="guide-card coming-soon" data-app="Samsung Email — switch">
         <div class="icon-frame"><img src="icons/samsung-email.png" alt=""></div>
         <div class="title">Samsung Email — remove old, re-add via Google</div>
         <div class="device">Samsung phones</div>
@@ -448,23 +509,15 @@
         </div>
       </div>
 
-      <div class="guide-card coming-soon" data-app="Webmail switch">
-        <div class="icon-frame">
-          <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#22315d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-        </div>
-        <div class="title">Webmail — switching from old website</div>
-        <div class="device">Any browser</div>
-        <div class="footer-row">
-          <span class="badge soon">Coming soon</span>
-          <span class="open-arrow">—</span>
-        </div>
-      </div>
-
     </div>
 
+    <!-- HELP BANNER -->
     <div class="help-banner">
-      <strong>Don't see your situation, or want someone to help in person?</strong><br>
-      Email <a href="mailto:ryan@crosbydevelopment.com">ryan@crosbydevelopment.com</a> and we'll walk you through it. If you haven't filled out the <a href="/">survey</a> yet, that's the fastest way for us to know what guide to send you.
+      <h3>Don't see your situation, or want someone to walk you through it?</h3>
+      <p>Call either of us — we're happy to do it with you over the phone or sit down in person.</p>
+      <p class="person">Ryan Crosby — <a href="tel:9853732383">985-373-2383</a></p>
+      <p class="person">HJ Crosby — <a href="tel:5048586547">504-858-6547</a></p>
+      <p style="margin-top:6px;">Or email <a href="mailto:ryan@crosbydevelopment.com">ryan@crosbydevelopment.com</a>. If you haven't filled out the <a href="/" style="text-decoration:underline;">survey</a> yet, that's the fastest way for us to know what to send you.</p>
     </div>
   </section>
 
@@ -474,10 +527,12 @@
 <div class="modal-bg" id="soonModal" role="dialog" aria-modal="true">
   <div class="modal">
     <h3>📝 This guide is on its way</h3>
-    <p>We're still putting together the walkthrough for <strong id="soonApp">this setup</strong>. In the meantime, email <a href="mailto:ryan@crosbydevelopment.com">ryan@crosbydevelopment.com</a> and we'll walk you through it directly — usually a 5-minute phone call.</p>
+    <p>We're still putting together the walkthrough for <strong id="soonApp">this setup</strong>. In the meantime, give us a ring and we'll do it with you — usually a 5-minute phone call.</p>
+    <p class="person">Ryan Crosby — <a href="tel:9853732383">985-373-2383</a></p>
+    <p class="person">HJ Crosby — <a href="tel:5048586547">504-858-6547</a></p>
     <div class="modal-actions">
       <button type="button" class="secondary" onclick="closeSoon()">Close</button>
-      <a class="modal-button" href="mailto:ryan@crosbydevelopment.com?subject=Email%20setup%20help" style="text-decoration:none;"><button type="button" class="primary">Email Ryan</button></a>
+      <a href="mailto:ryan@crosbydevelopment.com?subject=Email%20setup%20help" style="text-decoration:none;"><button type="button" class="primary">Email Ryan</button></a>
     </div>
   </div>
 </div>
