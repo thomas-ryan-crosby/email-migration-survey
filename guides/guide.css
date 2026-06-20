@@ -127,6 +127,34 @@ section.card ul { padding-left: 22px; margin: 0 0 10px; }
 .ui-box .row .label { font-weight: 600; }
 .ui-box .row .arrow { color: #64748b; }
 
+/* Real screenshots embedded from vendor sign-in screens */
+.screenshot {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  margin: 12px auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  background: white;
+}
+figure.screenshot-figure {
+  margin: 14px 0;
+  padding: 0;
+}
+figure.screenshot-figure figcaption {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+  text-align: center;
+  font-style: italic;
+}
+.screenshot.callout {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(94, 142, 208, 0.15), 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
 .btn-mock {
   display: inline-block;
   background: #2563eb;
@@ -255,4 +283,6 @@ table.tbl th {
   .ui-box.light { color: var(--ink) !important; }
   .btn-mock { background: #cbd5e1 !important; color: #0f172a !important; }
   .btn-mock.ghost { background: white !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
+  .screenshot { box-shadow: none !important; max-width: 520px; }
+  figure.screenshot-figure { page-break-inside: avoid; }
 }
